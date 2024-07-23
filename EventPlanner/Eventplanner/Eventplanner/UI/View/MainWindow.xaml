@@ -1,0 +1,75 @@
+﻿<Window x:Class="Eventplanner.UI.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Eventplanner.UI.View"  
+        xmlns:view="clr-namespace:Eventplanner.UI.View"
+         xmlns:viewDetail="clr-namespace:Eventplanner.UI.View.Detail"
+        xmlns:viewList="clr-namespace:Eventplanner.UI.View.List"
+        xmlns:viewModel="clr-namespace:Eventplanner.UI.ViewModel"
+        xmlns:viewModelList="clr-namespace:Eventplanner.UI.ViewModel.List"
+         xmlns:viewModelDetail="clr-namespace:Eventplanner.UI.ViewModel.Detail"
+        mc:Ignorable="d"
+        Title="EventPlanner" Height="700" Width="1000"  WindowStartupLocation="CenterScreen" FontSize="15" 
+        d:DataContext="{d:DesignInstance Type=viewModel:MainWindowViewModel}"
+       >
+
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModelDetail:EventDetailViewModel}">
+            <viewDetail:EventDetailView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModelDetail:PersonDetailViewModel}">
+            <viewDetail:PersonDetailView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModelDetail:RoomDetailViewModel}">
+            <viewDetail:RoomDetailView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModelList:EventListViewModel}">
+            <viewList:EventListView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModelList:PersonListViewModel}">
+            <viewList:PersonListView/>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+       
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <Menu Grid.Column="0" Background="	#E0EEEE" FontSize="30"  Padding="25">
+            <MenuItem Header="Eventplanner" Foreground="#262626" FontWeight="Bold"  />
+        </Menu>
+        <Menu Grid.Column="1" FontSize="15" Background="#E0EEEE" Foreground="#787878"  Padding="25">
+            <MenuItem Header="+ Neu">
+                <MenuItem Header="+ neues Event"  Command="{Binding CreateNewDetailCommand}"
+  CommandParameter="{x:Type viewModelDetail:EventDetailViewModel}"/>
+                <MenuItem Header="+ neue Person"  Command="{Binding CreateNewDetailCommand}"
+                  CommandParameter="{x:Type viewModelDetail:PersonDetailViewModel}" />
+                <MenuItem Header="+ neuer Raum"  Command="{Binding CreateNewDetailCommand}"
+                  CommandParameter="{x:Type viewModelDetail:RoomDetailViewModel}" />
+            </MenuItem>
+            <MenuItem Header="Events"  Command="{Binding NavigateToCommand}" CommandParameter="{x:Type viewModelList:EventListViewModel}"/>
+            <MenuItem Header="Kontakte"  Command="{Binding NavigateToCommand}" CommandParameter="{x:Type viewModelList:PersonListViewModel}" />
+            <MenuItem Header="Räume"  Command="{Binding NavigateToCommand}" CommandParameter="{x:Type viewModelList:RoomListViewModel}" />            
+            <MenuItem Header="Dienstplan"/>
+        </Menu>
+        <Menu Grid.Column="1" Background="#E0EEEE" FontSize="15" HorizontalAlignment="Right" Foreground="#787878"  Padding="25" >
+            <MenuItem Header="Profil" FontWeight="Bold" />
+        </Menu>
+        <!--<Viewbox Grid.Column="0" Grid.Row="2" Margin="0,10,0,10" Grid.ColumnSpan="1" >
+            <Calendar Padding="24"/>
+        </Viewbox>-->
+        <ContentControl Grid.Row="1" Grid.Column="0" Content="{Binding SelectedListViewModel}" Margin="30" />
+        <ContentControl Grid.Row="1" Grid.Column="1" Content="{Binding SelectedDetailViewModel}" Margin="30"  />
+    </Grid>
+</Window>

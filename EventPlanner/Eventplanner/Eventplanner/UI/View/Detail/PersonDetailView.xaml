@@ -1,0 +1,70 @@
+﻿<UserControl x:Class="Eventplanner.UI.View.Detail.PersonDetailView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Eventplanner.UI.View.Detail"
+             xmlns:viewModel="clr-namespace:Eventplanner.UI.ViewModel.Detail"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance Type=viewModel:PersonDetailViewModel}">
+    <Grid>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+
+        <StackPanel Grid.Column="0" HorizontalAlignment="Right" Margin="5" >
+            <Button Command="{Binding CloseDetailViewCommand}"  Content="x" VerticalContentAlignment="Top" FontSize="15" Padding="10"  Margin="10 0 10 10" BorderBrush="Transparent"/>
+            <Label />
+        </StackPanel>
+        <StackPanel Grid.Column="1" Background="#E0EEEE" >
+            <Label Content="Vorname" Grid.Row="1"  Margin="10 10 10 0" />
+            <TextBox Grid.Row="2"  Text="{Binding Person.FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10"/>
+
+            <Label Content="Nachname" Grid.Row="3"  Margin="10 10 10 0"/>
+            <TextBox Grid.Row="4"  Text="{Binding Person.LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10"/>
+
+            <Label Content="Telefonnummer" Grid.Row="5"  Margin="10 0"/>
+            <TextBox Grid.Row="6"  Text="{Binding Person.TelephoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10"/>
+
+            <Label Content="Email" Grid.Row="5"  Margin="10 0"/>
+            <TextBox Grid.Row="6"  Text="{Binding Person.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10"/>
+
+            <Label Content="Straße und Hausnummer" Grid.Row="7" Margin="10 0"/>
+            <TextBox Grid.Row="8"  Text="{Binding Address.StreetHouseNr, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10"/>
+
+            <StackPanel Grid.Row="10" Orientation="Horizontal" Margin="10"  >
+                <Label Content="PLZ"  Grid.Row="10" Margin="0 0 10 0" />
+                <TextBox Text="{Binding Address.PostalCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="125" Margin="0 0 10 10"/>
+                <Label Content="Stadt" Margin="0 0 10 0" />
+                <TextBox Text="{Binding Address.City, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 10 10" Width="300"/>
+            </StackPanel>
+            <ToggleButton Content="Meine Option" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        </StackPanel>
+      
+
+
+        <StackPanel Grid.Row="11" Grid.ColumnSpan="2" Margin="30" Orientation="Horizontal">
+            <Button Content="Save" Width="125" Margin="10" BorderBrush="Transparent" Command="{Binding SaveCommand}"/>
+            <Button Content="Delete" Width="125" Margin="10"  BorderBrush="Transparent" Command="{Binding DeleteCommand}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
