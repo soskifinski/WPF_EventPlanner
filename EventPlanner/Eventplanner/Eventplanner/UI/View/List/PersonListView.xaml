@@ -7,7 +7,7 @@
              xmlns:View="clr-namespace:Eventplanner.UI.View.List"
              xmlns:viewModel="clr-namespace:Eventplanner.UI.ViewModel.List"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
+             d:DesignHeight="500" d:DesignWidth="100"
              d:DataContext="{d:DesignInstance Type=viewModel:PersonListViewModel}">
 
     <UserControl.Resources>
@@ -18,7 +18,7 @@
         <DataTemplate x:Key="NaviItemTemplate">
             <Button Command="{Binding OpenDetailViewCommand}">
                 <Button.Content>
-                    <StackPanel Orientation="Horizontal" >
+                    <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding FirstName}" Margin="0,0,5,0" Foreground="#708090"  FontSize="16"/>
                         <TextBlock Text="{Binding LastName}" Foreground="#545454" FontSize="16"/>
                     </StackPanel>
@@ -50,16 +50,23 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" Content="Alle Kontakte" FontSize="20"  Padding="30 20" Foreground="#708090" FontWeight="Bold"/>
 
 
-        <GroupBox Grid.Row="1" BorderBrush="Transparent"  Padding="30 10"  >
-            <ScrollViewer VerticalScrollBarVisibility="Auto"
-     HorizontalScrollBarVisibility="Auto" >
+        <Label Grid.Row="0" Grid.Column="1" Content="Alle Kontakte" FontSize="20"  Padding="30 20" Foreground="#708090" FontWeight="Bold"/>
+
+
+        <GroupBox Grid.Row="1" BorderBrush="Transparent"  Padding="10">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" MaxHeight="400">
+                <!-- Optional: Adjust MaxHeight as needed -->
                 <ItemsControl ItemsSource="{Binding Persons}"
-             ItemContainerStyle="{StaticResource NaviItemContainerStyle}"
-             ItemTemplate="{StaticResource NaviItemTemplate}" Margin="10,10,0,10"/>
-
+                             ItemContainerStyle="{StaticResource NaviItemContainerStyle}"
+                             ItemTemplate="{StaticResource NaviItemTemplate}" Margin="10,10,0,10">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
             </ScrollViewer>
         </GroupBox>
     </Grid>

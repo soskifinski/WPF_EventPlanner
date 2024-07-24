@@ -30,6 +30,9 @@ namespace Eventplanner.UI.Startup
             builder.RegisterType<PersonListViewModel>()
             .Keyed<IListViewModel>(nameof(PersonListViewModel));
 
+            builder.RegisterType<RoomListViewModel>()
+           .Keyed<IListViewModel>(nameof(RoomListViewModel));
+
             builder.RegisterType<EventDetailViewModel>()
              .Keyed<IDetailViewModel>(nameof(EventDetailViewModel));
 

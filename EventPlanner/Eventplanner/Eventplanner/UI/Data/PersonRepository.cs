@@ -10,7 +10,8 @@ namespace Eventplanner.UI.Data
 {
     public class PersonRepository : GenericRepository<Person, EventPlannerDbContext>, IPersonRepository
     {
-        private Func<EventPlannerDbContext> _contextCreator;
+        public Func<EventPlannerDbContext> _contextCreator;
+
         public PersonRepository(EventPlannerDbContext context) : base(context)
         {
 
@@ -22,12 +23,12 @@ namespace Eventplanner.UI.Data
                 .ToListAsync();
         }
 
-        public async Task<bool> HasEventsAsync(int Id)
-        {
-            return await Context.Schedules.AsNoTracking()
-              .Include(m => m.Event)
-              .AnyAsync(m => m.Person.Id.Equals(Id));
-        }
+        //public async Task<bool> HasEventsAsync(int Id)
+        //{
+        //    return await Context.Schedules.AsNoTracking()
+        //      .Include(m => m.Event)
+        //      .AnyAsync(m => m.Person.Id.Equals(Id));
+        //}
 
         public async Task<List<Person>> GetPersonsLookupAsync()
         {
@@ -43,20 +44,17 @@ namespace Eventplanner.UI.Data
                          Email = m.Email,
                          TelephoneNumber = m.TelephoneNumber,
                          Address = m.Address,
-                         IsEmploee = m.IsEmploee
+                         IsEmployee = m.IsEmployee
                      })
                   .ToListAsync();
                 return items;
             }
         }
 
-        public Person FindById(int id)
+        public Person FindById(int personId)
         {
             Person thisPerson = null;
-            using (var ctx = _contextCreator())
-            {
-                thisPerson = ctx.Persons.AsNoTracking().FirstOrDefault(e => e.Id == id);
-            }
+            thisPerson = Context.Set<Person>().FirstOrDefault(e => e.Id == personId);
 
             return thisPerson;
         }

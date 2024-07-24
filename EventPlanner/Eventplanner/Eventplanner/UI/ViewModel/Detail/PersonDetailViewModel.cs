@@ -3,10 +3,7 @@ using Eventplanner.UI.Data;
 using Eventplanner.UI.Wrapper;
 using Prism.Commands;
 using Prism.Events;
-using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace Eventplanner.UI.ViewModel.Detail
 {
@@ -14,7 +11,6 @@ namespace Eventplanner.UI.ViewModel.Detail
     {
         private IPersonRepository _personRepository;
         private PersonWrapper _person;
-        private AddressWrapper _adress;
 
         public PersonWrapper Person
         {
@@ -26,17 +22,7 @@ namespace Eventplanner.UI.ViewModel.Detail
             }
         }
 
-        public AddressWrapper Address
-        {
-            get { return _adress; }
-            private set
-            {
-                _adress = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public PersonDetailViewModel(IEventAggregator eventAggregator,IPersonRepository personRepository) : base(eventAggregator)
+        public PersonDetailViewModel(IEventAggregator eventAggregator, IPersonRepository personRepository) : base(eventAggregator)
         {
             _personRepository = personRepository;
         }
@@ -46,16 +32,21 @@ namespace Eventplanner.UI.ViewModel.Detail
             var person = personId > 0
               ? await _personRepository.GetByIdAsync(personId)
               : CreateNewPerson();
-
             Id = personId;
-
             InitializePerson(person);
 
         }
 
         private void InitializePerson(Person person)
         {
-            Person = new PersonWrapper(person);
+            var addressWrapper = new AddressWrapper(person.Address ?? new Address());
+
+
+            Person = new PersonWrapper(person)
+            {
+                Address = addressWrapper
+            };
+
             Person.PropertyChanged += (sender, args) =>
             {
                 if (!HasChanges)
@@ -85,7 +76,13 @@ namespace Eventplanner.UI.ViewModel.Detail
 
         private Person CreateNewPerson()
         {
-            var Person = new Person();
+            var Address = new Address();
+            var Person = new Person()
+            {
+                IsEmployee = false,
+                Address = Address
+            };
+
             _personRepository.Add(Person);
             return Person;
         }
@@ -103,26 +100,17 @@ namespace Eventplanner.UI.ViewModel.Detail
 
         protected override async void OnDeleteExecute()
         {
-            
+            _personRepository.Remove(Person.Model);
+            await _personRepository.SaveAsync();
+            RaiseDetailDeletedEvent(Person.Id);
         }
         protected override async void OnSaveExecute()
         {
-
+            await _personRepository.SaveAsync();
+            HasChanges = _personRepository.HasChanges();
+            Id = Person.Id;
+            var displaymember = Person.FirstName;
+            RaiseDetailSavedEvent(Person.Id, displaymember);
         }
-        private void Option_Checked(object sender, RoutedEventArgs e)
-        {
-            // Code, der ausgeführt wird, wenn der ToggleButton im Checked-Zustand ist
-        }
-
-        private void Option_Unchecked(object sender, RoutedEventArgs e)
-        {
-            // Code, der ausgeführt wird, wenn der ToggleButton im Unchecked-Zustand ist
-        }
-
-        private void Option_Indeterminate(object sender, RoutedEventArgs e)
-        {
-            // Code, der ausgeführt wird, wenn der ToggleButton im Indeterminate-Zustand ist
-        }
-
     }
 }

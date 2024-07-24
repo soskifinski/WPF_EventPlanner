@@ -7,6 +7,10 @@
         public Institution Institution { get; set; }
         public int SeatsCapacity { get; set; }
         public string Description { get; set; }
+
+        public Room()
+        {
+        }
     }
 
     public class NullRoom : Room

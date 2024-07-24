@@ -8,7 +8,6 @@ namespace Eventplanner.UI.Data
     {
         Person FindById(int id);
         Task<List<Person>> GetAllPersonsAsync();
-
         Task<List<Person>> GetPersonsLookupAsync();
     }
 }

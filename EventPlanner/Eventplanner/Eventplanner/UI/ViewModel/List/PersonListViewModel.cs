@@ -7,7 +7,6 @@ using Prism.Events;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace Eventplanner.UI.ViewModel.List
 {
@@ -17,8 +16,6 @@ namespace Eventplanner.UI.ViewModel.List
         private IPersonRepository _personRepo;
         private IEventAggregator _eventAggregator;
         public ObservableCollection<PersonListItemViewModel> Persons { get; }
-
-        public ICommand OpenDetailViewCommand;
 
         public PersonListViewModel(IPersonRepository personRepo,
          IEventAggregator eventAggregator)

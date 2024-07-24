@@ -21,8 +21,8 @@
             <Button Command="{Binding OpenDetailViewCommand}">
                 <Button.Content>
                     <StackPanel Orientation="Vertical" Margin="10" >
-                        <TextBlock Grid.Row="2" Text="{Binding Title}" Margin="0,0,5,0" Foreground="#545454"  FontSize="18"/>
-                        <TextBlock Text="{Binding Date}" Foreground="#708090" FontSize="16"/>
+                        <TextBlock Grid.Row="2" Text="{Binding Title}" Margin="0,0,5,0" Foreground="#545454"  FontSize="16"/>
+                        <TextBlock Text="{Binding Date}" Foreground="#708090" FontSize="15"/>
                         <!--<TextBlock Text="{Binding Room}" Foreground="#787878" FontSize="16"/>-->
                         <TextBlock Text="{Binding Status}" Foreground="#787878" FontSize="10"/>
                     </StackPanel>
@@ -49,13 +49,9 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="70"/>
-            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
 
 
         <Label Grid.Column="1" Content="Alle Veranstaltungen" FontSize="20"  Padding="30 20" Foreground="#708090" FontWeight="Bold"/>

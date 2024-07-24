@@ -2,14 +2,11 @@
 using Eventplanner.UI.Data;
 using Eventplanner.UI.Events;
 using Eventplanner.UI.Wrapper;
-using FriendOrganizer.UI.ViewModel;
 using Prism.Commands;
 using Prism.Events;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
 
 namespace Eventplanner.UI.ViewModel.Detail
@@ -19,12 +16,11 @@ namespace Eventplanner.UI.ViewModel.Detail
         private IEventRepository _eventRepository;
         private IRoomRepository _roomRepo;
         private EventWrapper _event;
-        private string _title;
-        private string _subTitle;
+
         public ObservableCollection<Room> Rooms { get; }
 
         private Status _selectedStatus;
-        public ObservableCollection<Status> Stati { get; }
+        public ObservableCollection<Status> Stati { get; set; }
 
         public EventWrapper Event
         {
@@ -66,37 +62,17 @@ namespace Eventplanner.UI.ViewModel.Detail
             Id = eventId;
             InitializeEvent(thisEvent);
             await GetRoomsAsync();
+            //UpdateStatus von Published,Gebucht,inPreparation  wenn DatumUntil < AktuellesDatum  auf Stattgefunden 
             InitializeStatus();
         }
 
         private void InitializeStatus()
-        {
-            var statusString = " - ";
-            foreach (Status status in Stati)
+        {   
+            Stati.Clear();
+            var statiArray = Enum.GetValues(typeof(Status));
+            foreach (var status in statiArray)
             {
-                switch (status)
-                {
-                    case Status.REQUESTED:
-                        statusString = "Angefragt";
-                        break;
-                    case Status.PLANNED:
-                        statusString = "Geplant";
-                        break;
-                    case Status.PUBLISHED:
-                        statusString = "Veröffentlicht";
-                        break;
-                    case Status.BOOKEDUP:
-                        statusString = "Buchung bestätigt";
-                        break;
-                    case Status.TOOKPLACE:
-                        statusString = "Tatort";
-                        break;
-                    case Status.BILLED:
-                        statusString = "Rechnung erstellt";
-                        break;          
-                }
-                var wrapper = new StatusWrapper(statusString);
-               
+                Stati.Add((Status)status);
             }
         }
 

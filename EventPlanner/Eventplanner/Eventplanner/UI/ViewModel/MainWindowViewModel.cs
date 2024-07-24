@@ -45,7 +45,7 @@ namespace Eventplanner.UI.ViewModel
             set
             {
                 _selectedListViewModel = value;
-                OnPropertyChanged(nameof(SelectedListViewModel));
+                OnPropertyChanged();
             }
         }
 
@@ -64,7 +64,6 @@ namespace Eventplanner.UI.ViewModel
             ListViewModels = new ObservableCollection<IListViewModel>();
             NavigateToCommand = new DelegateCommand<Type>(Navigate);
 
-            //Subscriben von Werten
             _eventAggregator.GetEvent<OpenDetailViewEvent>()
                 .Subscribe(OnOpenDetailView);
             _eventAggregator.GetEvent<AfterDetailDeletedEvent>()
@@ -78,7 +77,7 @@ namespace Eventplanner.UI.ViewModel
             OnOpenListView(
                 new OpenListViewEventArgs
                 {
-                    Id = nextNewItemId--,
+                    Id = -1,
                     ViewModelName = viewModelType.Name
                 });
         }
@@ -128,16 +127,6 @@ namespace Eventplanner.UI.ViewModel
             }
             SelectedListViewModel = listViewModel;
 
-        }
-
-        private void OnOpenSingleDetailViewExecute(Type viewModelType)
-        {
-            OnOpenDetailView(
-              new OpenDetailViewEventArgs
-              {
-                  Id = -1,
-                  ViewModelName = viewModelType.Name
-              });
         }
 
         private void AfterDetailDeleted(AfterDetailDeletedEventArgs args)

@@ -5,14 +5,87 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Eventplanner.UI.View.Detail"
              xmlns:viewModel="clr-namespace:Eventplanner.UI.ViewModel.Detail"
+             xmlns:converter="clr-namespace:Eventplanner.UI.Converter"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance Type=viewModel:PersonDetailViewModel}">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type CheckBox}"
+           x:Key="SwitchCheckBoxStyle">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type CheckBox}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0"
+                              Width="40"
+                              Height="18">
+                                <!--Hitbox-->
+                                <Rectangle Fill="Transparent" />
+
+                                <!--Toggle-Switch Outline-->
+                                <Border CornerRadius="10" 
+                                    BorderBrush="#545454"
+                                    BorderThickness="1"
+                                    x:Name="ToggleBorder">
+                                    <!--Dot in Toggle-Switch-->
+                                    <Ellipse Fill="#545454" 
+                                         Height="10" 
+                                         Width="10" 
+                                         HorizontalAlignment="Left"
+                                         Margin="4,0"
+                                         VerticalAlignment="Center"
+                                         x:Name="ToggleEllipse"/>
+                                </Border>
+                            </Grid>
+                            <ContentPresenter Grid.Column="1"
+                                          Margin="4,0,0,0"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Left"/>
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <!--Change colors and move dot to the right-->
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="ToggleEllipse"
+                                    Property="HorizontalAlignment"
+                                    Value="Right" />
+                                <Setter TargetName="ToggleBorder"
+                                    Property="BorderBrush"
+                                    Value="#708090" />
+                                <Setter TargetName="ToggleBorder"
+                                    Property="Background"
+                                    Value="#708090" />
+                                <Setter TargetName="ToggleEllipse"
+                                    Property="Fill"
+                                    Value="White" />
+
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter TargetName="ToggleBorder"
+                                    Property="BorderThickness"
+                                    Value="1.5" />
+                                <Setter TargetName="ToggleBorder"
+                                    Property="BorderBrush"
+                                    Value="#545454"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"></Setter>
+        </Style>
+        <converter:GenderToBoolConverter x:Key="GenderToBoolConverter"/>
+    </UserControl.Resources>
     <Grid>
-        
+
         <Grid.RowDefinitions>
-            <RowDefinition />
             <RowDefinition Height="Auto"/>
+            <RowDefinition/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -31,15 +104,19 @@
         </Grid.ColumnDefinitions>
 
 
-        <StackPanel Grid.Column="0" HorizontalAlignment="Right" Margin="5" >
-            <Button Command="{Binding CloseDetailViewCommand}"  Content="x" VerticalContentAlignment="Top" FontSize="15" Padding="10"  Margin="10 0 10 10" BorderBrush="Transparent"/>
-            <Label />
-        </StackPanel>
-        <StackPanel Grid.Column="1" Background="#E0EEEE" >
-            <Label Content="Vorname" Grid.Row="1"  Margin="10 10 10 0" />
-            <TextBox Grid.Row="2"  Text="{Binding Person.FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10"/>
+        <StackPanel Grid.Column="1" Background="#E0EEEE" Margin="0 50" >
 
-            <Label Content="Nachname" Grid.Row="3"  Margin="10 10 10 0"/>
+            <CheckBox Style="{StaticResource SwitchCheckBoxStyle}"  IsChecked="{Binding Person.IsEmployee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="Mitarbeiter*in" Margin="20,30,30,0" VerticalAlignment="Top"/>
+
+            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="30">
+                <RadioButton Content="Herr" GroupName="genderGroup" IsChecked="{Binding Person.Gender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource GenderToBoolConverter}, ConverterParameter=MALE}" Margin="0 0 30 10"/>
+                <RadioButton Content="Frau" GroupName="genderGroup" IsChecked="{Binding Person.Gender,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource GenderToBoolConverter}, ConverterParameter=FEMALE}"/>
+            </StackPanel>
+
+            <Label Content="Vorname" Grid.Row="1"  Margin="10 0 10 0" />
+            <TextBox Grid.Row="1"  Text="{Binding Person.FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10"/>
+
+            <Label Content="Nachname" Grid.Row="1"  Margin="10 10 10 0"/>
             <TextBox Grid.Row="4"  Text="{Binding Person.LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10"/>
 
             <Label Content="Telefonnummer" Grid.Row="5"  Margin="10 0"/>
@@ -49,17 +126,20 @@
             <TextBox Grid.Row="6"  Text="{Binding Person.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10"/>
 
             <Label Content="Straße und Hausnummer" Grid.Row="7" Margin="10 0"/>
-            <TextBox Grid.Row="8"  Text="{Binding Address.StreetHouseNr, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10"/>
+            <TextBox Grid.Row="8"  Text="{Binding Person.Address.StreetHouseNr, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10"/>
 
-            <StackPanel Grid.Row="10" Orientation="Horizontal" Margin="10"  >
+            <StackPanel Grid.Row="9" Orientation="Horizontal" Margin="10"  >
                 <Label Content="PLZ"  Grid.Row="10" Margin="0 0 10 0" />
-                <TextBox Text="{Binding Address.PostalCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="125" Margin="0 0 10 10"/>
-                <Label Content="Stadt" Margin="0 0 10 0" />
-                <TextBox Text="{Binding Address.City, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 10 10" Width="300"/>
+                <TextBox Text="{Binding Person.Address.PostalCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="125" Margin="0 0 10 10"/>
+                <Label Content="Wohnort" Margin="0 0 10 0" />
+                <TextBox Text="{Binding Person.Address.City, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 10 10" Width="300"/>
+
             </StackPanel>
-            <ToggleButton Content="Meine Option" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+            
+            <Label Content="Land" Margin="10 0 10 0" Grid.Row="9"/>
+            <TextBox Grid.Row="9" Text="{Binding Person.Address.Country, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10" />
         </StackPanel>
-      
+
 
 
         <StackPanel Grid.Row="11" Grid.ColumnSpan="2" Margin="30" Orientation="Horizontal">

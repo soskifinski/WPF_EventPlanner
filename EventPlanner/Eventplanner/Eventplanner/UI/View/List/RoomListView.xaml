@@ -4,15 +4,64 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Eventplanner.UI.View.List"
+             xmlns:View="clr-namespace:Eventplanner.UI.View.List"
+             xmlns:viewDetail="clr-namespace:Eventplanner.UI.View.Detail"
+             xmlns:viewModel="clr-namespace:Eventplanner.UI.ViewModel.List"
+            xmlns:viewModelDetail="clr-namespace:Eventplanner.UI.ViewModel.Detail"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+             d:DesignHeight="450" d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance Type=viewModel:RoomListViewModel}">
 
-        <Label Grid.Row="6" Content="Favorite Language" Margin="10 0"/>
-        <ComboBox Grid.Row="7" ItemsSource="{Binding ProgrammingLanguages}" 
-                  DisplayMemberPath="DisplayMember" 
-                  SelectedValuePath="Id"
-                  SelectedValue="{Binding Friend.FavoriteLanguageId, Mode=TwoWay}"
-                  Margin="10 0 10 10"/>
+    <UserControl.Resources>
+        <Style x:Key="NaviItemContainerStyle"  TargetType="ContentPresenter">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="2"/>
+        </Style>
+        <DataTemplate x:Key="NaviItemTemplate">
+            <Button Command="{Binding OpenDetailViewCommand}">
+                <Button.Content>
+                    <StackPanel Orientation="Vertical" >
+                        <TextBlock Grid.Row="2" Text="{Binding RoomNumber}" Margin="10,0,0,0" Foreground="#545454"  FontSize="16"/>
+                        <!--<TextBlock Text="{Binding Institution}" Foreground="#708090" FontSize="16"/>-->
+                    </StackPanel>
+                </Button.Content>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Grid x:Name="grid">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="FontWeight" Value="Normal"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </DataTemplate>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+
+        <Label Grid.Column="1" Content="Alle Räume" FontSize="20"  Padding="30 20" Foreground="#708090" FontWeight="Bold"/>
+
+        <GroupBox Grid.Column="1" Grid.Row="2" BorderBrush="Transparent" Padding="10">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                <ItemsControl ItemsSource="{Binding Rooms}"
+                  ItemContainerStyle="{StaticResource NaviItemContainerStyle}"
+                  ItemTemplate="{StaticResource NaviItemTemplate}" Margin="10,10,0,10"/>
+            </ScrollViewer>
+        </GroupBox>
     </Grid>
+    
 </UserControl>

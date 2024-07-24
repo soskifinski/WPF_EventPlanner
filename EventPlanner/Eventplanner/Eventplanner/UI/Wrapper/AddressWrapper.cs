@@ -20,11 +20,6 @@ namespace Eventplanner.UI.Wrapper
             get { return GetValue<string>(); }
             set { SetValue(value); }
         }
-        public string PLZ
-        {
-            get { return GetValue<string>(); }
-            set { SetValue(value); }
-        }
 
         public string City
         {

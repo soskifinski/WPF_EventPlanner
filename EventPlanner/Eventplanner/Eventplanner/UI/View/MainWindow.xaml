@@ -31,6 +31,9 @@
         <DataTemplate DataType="{x:Type viewModelList:PersonListViewModel}">
             <viewList:PersonListView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModelList:RoomListViewModel}">
+            <viewList:RoomListView/>
+        </DataTemplate>
     </Window.Resources>
     <Grid>
        
@@ -45,7 +48,7 @@
             <ColumnDefinition />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-
+   
         <Menu Grid.Column="0" Background="	#E0EEEE" FontSize="30"  Padding="25">
             <MenuItem Header="Eventplanner" Foreground="#262626" FontWeight="Bold"  />
         </Menu>
@@ -60,8 +63,9 @@
             </MenuItem>
             <MenuItem Header="Events"  Command="{Binding NavigateToCommand}" CommandParameter="{x:Type viewModelList:EventListViewModel}"/>
             <MenuItem Header="Kontakte"  Command="{Binding NavigateToCommand}" CommandParameter="{x:Type viewModelList:PersonListViewModel}" />
-            <MenuItem Header="Räume"  Command="{Binding NavigateToCommand}" CommandParameter="{x:Type viewModelList:RoomListViewModel}" />            
-            <MenuItem Header="Dienstplan"/>
+            <MenuItem Header="Räume"  Command="{Binding NavigateToCommand}" CommandParameter="{x:Type viewModelList:RoomListViewModel}" />
+            <MenuItem Header="Dienstplan" Command="{Binding OpenSingleDetailViewCommand}"
+                     CommandParameter="{x:Type viewModelDetail:PersonDetailViewModel}" />
         </Menu>
         <Menu Grid.Column="1" Background="#E0EEEE" FontSize="15" HorizontalAlignment="Right" Foreground="#787878"  Padding="25" >
             <MenuItem Header="Profil" FontWeight="Bold" />
@@ -69,7 +73,23 @@
         <!--<Viewbox Grid.Column="0" Grid.Row="2" Margin="0,10,0,10" Grid.ColumnSpan="1" >
             <Calendar Padding="24"/>
         </Viewbox>-->
-        <ContentControl Grid.Row="1" Grid.Column="0" Content="{Binding SelectedListViewModel}" Margin="30" />
-        <ContentControl Grid.Row="1" Grid.Column="1" Content="{Binding SelectedDetailViewModel}" Margin="30"  />
+        <ContentControl Grid.Row="1" Grid.Column="0" Content="{Binding SelectedListViewModel}" Margin="10" />
+        <!--<ContentControl Grid.Row="1" Grid.Column="1" Content="{Binding SelectedDetailViewModel}" Margin="30"  />-->
+        
+        
+        <TabControl Grid.Row="1" Grid.Column="1" 
+        ItemsSource="{Binding DetailViewModels}"
+        SelectedItem="{Binding SelectedDetailViewModel,Mode=TwoWay}" BorderBrush="Transparent" Margin="20">
+            <TabControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Title}"/>
+                        <TextBlock Text="*" Visibility="{Binding HasChanges,
+                    Converter={StaticResource booleanToVisibilityConverter}}"/>
+                        <Button Command="{Binding CloseDetailViewCommand}"  Content="X"  FontSize="15"   Margin="10 0" BorderBrush="Transparent"/>
+                    </StackPanel>
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+        </TabControl>
     </Grid>
 </Window>

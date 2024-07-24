@@ -1,6 +1,6 @@
 ﻿namespace Eventplanner.UI.ViewModel.Detail
 {
-    public interface IRoomDetailViewModel : IDetailViewModel
+    public interface IRoomDetailViewModel:IDetailViewModel
     {
     }
 }

@@ -14,5 +14,15 @@ namespace Eventplanner.UI.Wrapper
             get { return GetValue<string>(); }
             set { SetValue(value); }
         }
+        public int SeatsCapacity
+        {
+            get { return GetValue<int>(); }
+            set { SetValue(value); }
+        }
+        public string Description
+        {
+            get { return GetValue<string>(); }
+            set { SetValue(value); }
+        }
     }
 }

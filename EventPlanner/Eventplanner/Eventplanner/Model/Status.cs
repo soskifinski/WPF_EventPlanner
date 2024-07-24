@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,8 +13,10 @@ namespace Eventplanner.Model
         PLANNED,
         PUBLISHED,
         BOOKEDUP,
+        INPREPARATION,
         TOOKPLACE,
-        BILLED
+        BILLED,
+        CLOSED
     }
 
     public enum TicketCategory
@@ -28,7 +31,9 @@ namespace Eventplanner.Model
         ORGANIZER,
         ARTIST,
         GUARD,
-        CLEANER
+        CLEANER,
+        TECHNICIAN,
+        CONSTRUCTIONHELPER
     }
 
     public enum WeekDays
@@ -40,5 +45,11 @@ namespace Eventplanner.Model
         FRIDAY,
         SATURDAY,
         SUNDAY
+    }
+    public enum Gender
+    {
+        MALE,
+        FEMALE,
+        DIVERS
     }
 }

@@ -1,18 +1,14 @@
-﻿using Autofac.Features.Indexed;
-using Eventplanner.Model;
-using Eventplanner.Properties;
+﻿using Eventplanner.Model;
 using Eventplanner.UI.Data;
 using Eventplanner.UI.Events;
 using Eventplanner.UI.ViewModel.Detail;
 using FriendOrganizer.UI.ViewModel;
-using Prism.Commands;
 using Prism.Events;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace Eventplanner.UI.ViewModel.List
 {
@@ -23,8 +19,6 @@ namespace Eventplanner.UI.ViewModel.List
         private IEventAggregator _eventAggregator;
         public ObservableCollection<EventListItemViewModel> Events { get; }
 
-        public ICommand OpenDetailViewCommand;
-
         public EventListViewModel(IEventRepository eventRepo,
           IEventAggregator eventAggregator)
         {
@@ -32,7 +26,7 @@ namespace Eventplanner.UI.ViewModel.List
             _eventAggregator = eventAggregator;
             Events = new ObservableCollection<EventListItemViewModel>();
             _eventAggregator.GetEvent<AfterDetailSavedEvent>().Subscribe(AfterDetailSaved);
-            _eventAggregator.GetEvent<AfterDetailDeletedEvent>().Subscribe(AfterDetailDeleted);
+            _eventAggregator.GetEvent<AfterDetailDeletedEvent>().Subscribe(AfterDetailDeleted);           
         }
 
         public async Task LoadAsync()
@@ -48,7 +42,6 @@ namespace Eventplanner.UI.ViewModel.List
             {
                 Events.Add(new EventListItemViewModel(item, nameof(EventDetailViewModel), _eventAggregator));
             }
-
         }
 
 
@@ -66,6 +59,9 @@ namespace Eventplanner.UI.ViewModel.List
             else
             {
                 Event.Title = args.DisplayMember;
+                Event.DateTimeFrom = args.DateStart;
+                Event.DateTimeTo = args.DateEnd;
+                Event.Status = args.Status;
             }
         }
 

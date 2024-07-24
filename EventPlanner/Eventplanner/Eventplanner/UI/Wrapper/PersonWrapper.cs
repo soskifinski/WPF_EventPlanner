@@ -35,18 +35,19 @@ namespace Eventplanner.UI.Wrapper
             set { SetValue(value); }
         }
 
+        public bool IsEmployee
+        {
+            get { return GetValue<bool>(); }
+            set { SetValue(value); }
+        }
 
-        //protected override IEnumerable<string> ValidateProperty(string propertyName)
-        //{
-        //    switch (propertyName)
-        //    {
-        //        case nameof(Email):
-        //            if (string.Equals(FirstName, "Robot", StringComparison.OrdinalIgnoreCase))
-        //            {
-        //                yield return "Robots are not valid friends";
-        //            }
-        //            break;
-        //    }
-        //}
+        public Gender Gender
+        {
+            get { return GetValue<Gender>(); }
+            set { SetValue(value); }
+        }
+
+        public AddressWrapper Address { get; set; }
+        
     }
 }

@@ -3,15 +3,13 @@ using Eventplanner.UI.Events;
 using FriendOrganizer.UI.ViewModel;
 using Prism.Commands;
 using Prism.Events;
-using System.Globalization;
 using System.Windows.Input;
 
-namespace Eventplanner.UI.ViewModel
+namespace Eventplanner.UI.ViewModel.List
 {
     public class RoomListItemViewModel : ViewModelBase
     {
         private string _roomNumber;
-        private string _Institution;
         private IEventAggregator _eventAggregator;
         private string _detailViewModelName;
         public ICommand OpenDetailViewCommand { get; }
@@ -27,28 +25,15 @@ namespace Eventplanner.UI.ViewModel
             }
         }
 
-
-        public string Institution
-        {
-            get { return _Institution; }
-            set
-            {
-                _Institution = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public RoomListItemViewModel(Room _room,
-          string detailViewModelName,
-          IEventAggregator eventAggregator)
+        public RoomListItemViewModel(Room _room,string detailViewModelName,IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
             Id = _room.Id;
             RoomNumber = _room.RoomNumber;
-            Institution = _room.Institution.Name;
             _detailViewModelName = detailViewModelName;
             OpenDetailViewCommand = new DelegateCommand(OnOpenDetailViewExecute);
         }
+
         private void OnOpenDetailViewExecute()
         {
             _eventAggregator.GetEvent<OpenDetailViewEvent>()

@@ -45,5 +45,13 @@ namespace Eventplanner.UI.Data
             return await Context.Events.AsNoTracking()
                 .AnyAsync(f => f.RoomId == Id);
         }
+
+        public Room FindById(int id)
+        {
+            Room room = null;
+            room = Context.Set<Room>().FirstOrDefault(e => e.Id == id);
+
+            return room;
+        }
     }
 }

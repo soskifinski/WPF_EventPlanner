@@ -2,7 +2,6 @@
 using Eventplanner.Model;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,7 +10,7 @@ namespace Eventplanner.UI.Data
 {
     public class EventRepository : GenericRepository<Event, EventPlannerDbContext>, IEventRepository
     {
-        private Func<EventPlannerDbContext> _contextCreator;
+        public Func<EventPlannerDbContext> _contextCreator;
 
         public EventRepository(EventPlannerDbContext context) : base(context)
         {
@@ -46,16 +45,10 @@ namespace Eventplanner.UI.Data
             }
         }
 
-        public async Task<List<Person>> GetAllPersonsAsync()
-        {
-            return await Context.Set<Person>()
-                .ToListAsync();
-        }
-
-        public Event FindById(int id)
+        public Event FindById(int eventId)
         {
             Event thisEvent = null;
-            thisEvent = Context.Set<Event>().FirstOrDefault(e => e.Id == id);
+            thisEvent = Context.Set<Event>().FirstOrDefault(e => e.Id == eventId);
             
             return thisEvent;
         }

@@ -41,6 +41,12 @@ namespace Eventplanner.UI.Wrapper
             }
         }
 
+        public Status Status
+        {
+            get { return GetValue<Status>(); }
+            set { SetValue(value); }
+        }
+
         public int StatusId
         {
             get { return GetValue<int>(); }

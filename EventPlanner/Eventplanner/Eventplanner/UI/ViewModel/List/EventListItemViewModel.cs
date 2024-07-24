@@ -3,9 +3,6 @@ using Eventplanner.UI.Events;
 using FriendOrganizer.UI.ViewModel;
 using Prism.Commands;
 using Prism.Events;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
 using System.Windows.Input;
 
 namespace Eventplanner.UI.ViewModel
@@ -17,6 +14,7 @@ namespace Eventplanner.UI.ViewModel
         private string _status;
         private string _date;
         private string _dateTimeTo;
+        private string _dateTimeFrom;
 
         private IEventAggregator _eventAggregator;
         private string _detailViewModelName;
@@ -46,10 +44,10 @@ namespace Eventplanner.UI.ViewModel
 
         public string Status
         {
-            get { return _subtitle; }
+            get { return _status; }
             set
             {
-                _subtitle = value;
+                _status = value;
                 OnPropertyChanged();
             }
         }
@@ -70,6 +68,16 @@ namespace Eventplanner.UI.ViewModel
             set
             {
                 _dateTimeTo = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string DateTimeFrom
+        {
+            get { return _dateTimeFrom; }
+            set
+            {
+                _dateTimeFrom = value;
                 OnPropertyChanged();
             }
         }

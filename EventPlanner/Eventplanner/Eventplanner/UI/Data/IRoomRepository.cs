@@ -6,7 +6,8 @@ namespace Eventplanner.UI.Data
 {
     public interface IRoomRepository : IGenericRepository<Room>
     {
+        Room FindById(int Id);
         Task<List<Room>> GetAllRoomsAsync();
-        Task<bool> IsReferenceByEventAsync(int programmingLanguageId);
+        Task<bool> IsReferenceByEventAsync(int Id);
     }
 }

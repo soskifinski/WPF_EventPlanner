@@ -1,6 +1,4 @@
-﻿using Eventplanner.Properties;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Eventplanner.Model

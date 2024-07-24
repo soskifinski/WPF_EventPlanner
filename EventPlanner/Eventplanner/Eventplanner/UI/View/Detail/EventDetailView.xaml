@@ -21,15 +21,12 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-       
-        <StackPanel Grid.Column="0" HorizontalAlignment="Left" Margin="5" >
-            <Button Command="{Binding CloseDetailViewCommand}"  Content="x" VerticalContentAlignment="Top" FontSize="15" BorderBrush="Transparent" />
-        </StackPanel>
         <ComboBox Grid.Column="1" Grid.Row="0" ItemsSource="{Binding Stati}" 
-         DisplayMemberPath="Status" 
-         SelectedValuePath="Id"
-         SelectedValue="{Binding Event.StatusId, Mode=TwoWay}"
+         SelectedValue="{Binding Event.Status, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
          Margin="10 5 10 20" Width="150" HorizontalAlignment="Right"/>
+        
+        
+        
         <StackPanel Grid.Column="1"  Grid.Row="1" Background="#E0EEEE">
             <Label Content="Titel" Margin="10 10 10 0" />
             <TextBox Text="{Binding Event.Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10"/>
@@ -44,6 +41,7 @@
             <toolkit:DateTimePicker  Value="{Binding Event.DateTimeTo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10"/>
 
             <Label Content="Raum"  Margin="10 10 10 0"/>
+            
             <ComboBox  ItemsSource="{Binding Rooms}" 
                  DisplayMemberPath="RoomNumber" 
                  SelectedValuePath="Id"
