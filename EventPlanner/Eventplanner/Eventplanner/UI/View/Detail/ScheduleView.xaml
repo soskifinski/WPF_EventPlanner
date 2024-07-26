@@ -7,9 +7,66 @@
              xmlns:wrapper="clr-namespace:Eventplanner.UI.Wrapper"
              xmlns:viewModel="clr-namespace:Eventplanner.UI.ViewModel.Detail"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
+             d:DesignHeight="450" d:DesignWidth="1000"
              >
     <Grid>
-        <Label Content="End" Margin="10 0"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0">
+            <Label Content="" Grid.Row="1" Margin="10 0" />
+            <Label Content="Mitarbeiter" Grid.Row="1" Margin="10 0" />
+        </StackPanel>
+        <StackPanel Background="Gray" Grid.Column="1">
+            <Label Content="Montag" Margin="10 0"/>
+        </StackPanel>
+        <StackPanel Grid.Column="2">
+            <Label Content="Dienstag" Margin="10 0"/>
+        </StackPanel>
+        <StackPanel Background="Gray" Grid.Column="3">
+            <Label Content="Mittwoch" Margin="10 0"/>
+        </StackPanel>
+        <StackPanel Grid.Column="4">
+            <Label Content="Donnerstag" Margin="10 0"/>
+        </StackPanel>
+        <StackPanel Background="Gray" Grid.Column="5">
+            <Label Content="Freitag" Margin="10 0"/>
+        </StackPanel>
+        <StackPanel  Grid.Column="6">
+            <Label Content="Samstag" Margin="10 0"/>
+        </StackPanel>
+        <StackPanel Background="Gray" Grid.Column="7">
+            <Label Content="Sonntag" Margin="10 0"/>
+        </StackPanel>
+        
+        
     </Grid>
 </UserControl>
