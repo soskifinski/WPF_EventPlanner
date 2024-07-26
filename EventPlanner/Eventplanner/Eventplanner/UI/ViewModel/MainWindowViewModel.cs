@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Eventplanner.UI.ViewModel
 {
@@ -25,6 +26,7 @@ namespace Eventplanner.UI.ViewModel
 
         public ICommand CreateNewDetailCommand { get; }
         public ICommand NavigateToCommand { get; }
+        public ICommand OpenSingleDetailViewCommand { get; }
         public ObservableCollection<IDetailViewModel> DetailViewModels { get; }
         public ObservableCollection<IListViewModel> ListViewModels { get; }
 
@@ -60,6 +62,7 @@ namespace Eventplanner.UI.ViewModel
 
             DetailViewModels = new ObservableCollection<IDetailViewModel>();
             CreateNewDetailCommand = new DelegateCommand<Type>(OnCreateNewDetailExecute);
+            OpenSingleDetailViewCommand = new DelegateCommand<Type>(OnOpenSingleDetailViewExecute);
 
             ListViewModels = new ObservableCollection<IListViewModel>();
             NavigateToCommand = new DelegateCommand<Type>(Navigate);
@@ -70,6 +73,17 @@ namespace Eventplanner.UI.ViewModel
               .Subscribe(AfterDetailDeleted);
             _eventAggregator.GetEvent<AfterDetailClosedEvent>()
               .Subscribe(AfterDetailClosed);
+        }
+
+        private void OnOpenSingleDetailViewExecute(Type viewModelType)
+        {
+            SelectedListViewModel = null;
+            OnOpenDetailView(
+              new OpenDetailViewEventArgs
+              {
+                  Id = -1,
+                  ViewModelName = viewModelType.Name
+              });
         }
 
         private void Navigate(Type viewModelType)

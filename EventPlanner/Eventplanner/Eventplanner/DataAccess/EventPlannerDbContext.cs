@@ -14,7 +14,7 @@ namespace Eventplanner.DataAccess
 
         public DbSet<Person> Persons { get; set; }
 
-        public DbSet<Institution> Institutions { get; set; }
+        public DbSet<Location> Locations { get; set; }
 
         public DbSet<Address> Addresses { get; set; }
 
@@ -22,7 +22,7 @@ namespace Eventplanner.DataAccess
 
         public DbSet<Schedule> Schedules { get; set; }
 
-        public DbSet<Appointment> Appointments { get; set; }
+        public DbSet<ServiceTask> Appointments { get; set; }
 
         public DbSet<Ticket> Tickets { get; set; }
     }

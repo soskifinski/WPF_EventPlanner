@@ -19,13 +19,13 @@ namespace Eventplanner.Model
         CLOSED
     }
 
-    public enum TicketCategory
+    public enum PriceCategory
     {
         CHILD,
         ADULT,
         DISCOUNT
     }
-    public enum Role
+    public enum ServiceRole
     {
         SUPERVISOR,
         ORGANIZER,

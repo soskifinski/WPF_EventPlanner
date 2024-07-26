@@ -24,44 +24,55 @@
         <ComboBox Grid.Column="1" Grid.Row="0" ItemsSource="{Binding Stati}" 
          SelectedValue="{Binding Event.Status, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
          Margin="10 5 10 20" Width="150" HorizontalAlignment="Right"/>
-        
-        
-        
+
+
+
         <StackPanel Grid.Column="1"  Grid.Row="1" Background="#E0EEEE">
             <Label Content="Titel" Margin="10 10 10 0" />
             <TextBox Text="{Binding Event.Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10"/>
 
             <Label Content="Untertitel"   Margin="10 10 10 0"/>
             <TextBox  Text="{Binding Event.SubTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10"/>
-            
+
             <Label Content="Start"  Margin="10 0"/>
             <toolkit:DateTimePicker  Value="{Binding Event.DateTimeFrom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10"/>
 
-            <Label Content="End" Margin="10 0"/>
+            <Label Content="Ende" Margin="10 0"/>
             <toolkit:DateTimePicker  Value="{Binding Event.DateTimeTo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10"/>
 
             <Label Content="Raum"  Margin="10 10 10 0"/>
-            
             <ComboBox  ItemsSource="{Binding Rooms}" 
-                 DisplayMemberPath="RoomNumber" 
-                 SelectedValuePath="Id"
-                 SelectedValue="{Binding Event.RoomId, Mode=TwoWay}"
-                 Margin="10 0 10 10">       
+            DisplayMemberPath="RoomNumber" 
+            SelectedValuePath="Id"
+            SelectedValue="{Binding Event.RoomId, Mode=TwoWay}"
+            Margin="10 0 10 10" Width="300">
                 <ComboBox.ItemContainerStyle>
                     <Style TargetType="ComboBoxItem">
                         <Setter Property="Background" Value="White"/>
                     </Style>
                 </ComboBox.ItemContainerStyle>
             </ComboBox>
-            
+
             <Label Content="Gesamte Ticketanzahl"  Margin="10 10 10 0"/>
             <TextBox Text="{Binding Event.TotalTickets, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10"/>
+
+
+            <Label Content="Dienste"  Margin="10 10 10 0" FontSize="20"/>
+
+            <Label Content="Veranstalter"  Margin="10 10 10 0"/>
+           
+            <Label Content="Veranstaltungsleitung"  Margin="10 10 10 0"/>
+            
+            <Label Content="Techniker"  Margin="10 10 10 0"/>
+            
         </StackPanel>
-        
+
 
         <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Margin="30" Orientation="Horizontal">
             <Button Content="Save" Width="125" Margin="10" BorderBrush="Transparent" Command="{Binding SaveCommand}" />
             <Button Content="Delete" Width="125" Margin="10" BorderBrush="Transparent" Command="{Binding DeleteCommand}" />
         </StackPanel>
+
     </Grid>
+
 </UserControl>

@@ -4,8 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Net;
-using System.Runtime.Remoting.Contexts;
 using System.Threading.Tasks;
 
 namespace Eventplanner.UI.Data
@@ -45,6 +43,7 @@ namespace Eventplanner.UI.Data
                          Email = m.Email,
                          TelephoneNumber = m.TelephoneNumber,
                          Address = m.Address,
+                         AddressId = m.AddressId,
                          IsEmployee = m.IsEmployee
                      })
                   .ToListAsync();

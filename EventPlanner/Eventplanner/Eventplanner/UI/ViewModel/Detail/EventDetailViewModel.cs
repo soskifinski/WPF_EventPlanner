@@ -1,4 +1,5 @@
-﻿using Eventplanner.Model;
+﻿using Eventplanner.DataAccess;
+using Eventplanner.Model;
 using Eventplanner.UI.Data;
 using Eventplanner.UI.Events;
 using Eventplanner.UI.Wrapper;
@@ -15,9 +16,11 @@ namespace Eventplanner.UI.ViewModel.Detail
     {
         private IEventRepository _eventRepository;
         private IRoomRepository _roomRepo;
+        private IScheduleRepository _scheduleRepo;
         private EventWrapper _event;
 
         public ObservableCollection<Room> Rooms { get; }
+        public ObservableCollection<ServiceTask> Appointments { get; }
 
         private Status _selectedStatus;
         public ObservableCollection<Status> Stati { get; set; }
@@ -42,14 +45,16 @@ namespace Eventplanner.UI.ViewModel.Detail
             }
         }
 
-        public EventDetailViewModel(IEventAggregator eventAggregator, IEventRepository eventRepository, IRoomRepository roomRepository) : base(eventAggregator)
+        public EventDetailViewModel(IEventAggregator eventAggregator, IEventRepository eventRepository, IRoomRepository roomRepository, IScheduleRepository scheduleRepository) : base(eventAggregator)
         {
             _eventRepository = eventRepository;
             _roomRepo = roomRepository;
+            _scheduleRepo = scheduleRepository;
 
             eventAggregator.GetEvent<AfterCollectionSavedEvent>()
                .Subscribe(AfterCollectionSaved);
             Rooms = new ObservableCollection<Room>();
+            Appointments = new ObservableCollection<ServiceTask>();
             Stati = new ObservableCollection<Status>();
         }
 
@@ -62,7 +67,8 @@ namespace Eventplanner.UI.ViewModel.Detail
             Id = eventId;
             InitializeEvent(thisEvent);
             await GetRoomsAsync();
-            //UpdateStatus von Published,Gebucht,inPreparation  wenn DatumUntil < AktuellesDatum  auf Stattgefunden 
+            await GetServiceTasksAsync();
+            //UpdateStatus von Published,Gebucht,inPreparation  wenn DatumUntil < AktuellesDatum  auf Stattgefunden fehlt
             InitializeStatus();
         }
 
@@ -172,6 +178,19 @@ namespace Eventplanner.UI.ViewModel.Detail
             {
                 Rooms.Add(room);
             }
+        }
+
+        private async Task GetServiceTasksAsync()
+        {
+            //Alle Personen laden die Employees sind 
+            //Und eigentlich pro Rolle schauen ob eine Person für dieses Event das zugeschrieben bekommen aht
+
+            //Appointments.Clear();
+            //var appointments = await _scheduleRepo.GetAllAppointmentsOfEventAsync();
+            //foreach ()
+            //{
+            //    Appointments.Add(employee);
+            //}
         }
 
     }

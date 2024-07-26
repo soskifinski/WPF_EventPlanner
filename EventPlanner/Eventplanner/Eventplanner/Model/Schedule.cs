@@ -1,14 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Eventplanner.Model
 {
     public class Schedule
     {
-        public int Id { get; set; }
-        public Person Person { get; set; }
-        public Event Event { get; set; }
-        public Role Role { get; set; }
-        public DateTime DateTimeFrom { get; set; }
-        public DateTime DateTimeUntil { get; set; }
+        public int Id { get; set; } 
+        public List<ServiceTask> Appointments { get; set; }
     }
 }

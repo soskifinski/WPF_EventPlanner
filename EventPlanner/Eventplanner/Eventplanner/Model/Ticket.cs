@@ -15,7 +15,7 @@ namespace Eventplanner.Model
     public class TicketPrices
     {
         public int Id { get; set; }
-        public TicketCategory Type { get; set; }
+        public PriceCategory PriceCategory { get; set; }
 
         public decimal Price { get; set; }
     }
