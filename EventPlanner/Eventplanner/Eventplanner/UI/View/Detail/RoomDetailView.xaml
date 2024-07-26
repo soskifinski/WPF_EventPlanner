@@ -24,8 +24,18 @@
             <Label Content="Raumbezeichnung / Nummer" Margin="10 10 10 0" />
             <TextBox Text="{Binding Room.RoomNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10"/>
 
-            <!--<Label Content="Institution"   Margin="10 10 10 0"/>
-            --><!--<TextBox  Text="{Binding R, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10"/>-->
+            <Label Content="Location"   Margin="10 10 10 0"/>
+            <ComboBox  ItemsSource="{Binding Locations}" 
+            DisplayMemberPath="Name"
+            SelectedValuePath="Id"
+            SelectedValue="{Binding Room.LocationId, Mode=TwoWay}"
+            Margin="10 0 10 10">
+                <ComboBox.ItemContainerStyle>
+                    <Style TargetType="ComboBoxItem">
+                        <Setter Property="Background" Value="White"/>
+                    </Style>
+                </ComboBox.ItemContainerStyle>
+            </ComboBox>
         </StackPanel>
 
         <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Margin="30" Orientation="Horizontal">

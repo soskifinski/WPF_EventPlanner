@@ -24,5 +24,11 @@ namespace Eventplanner.UI.Wrapper
             get { return GetValue<string>(); }
             set { SetValue(value); }
         }
+
+        public int? LocationId
+        {
+            get { return GetValue<int?>(); }
+            set { SetValue(value); }
+        }
     }
 }

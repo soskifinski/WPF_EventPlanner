@@ -1,14 +1,8 @@
-﻿using Eventplanner.DataAccess;
-using Eventplanner.Model;
+﻿using Eventplanner.Model;
 using Eventplanner.UI.Data;
 using Eventplanner.UI.Wrapper;
 using Prism.Commands;
 using Prism.Events;
-using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Net;
-using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace Eventplanner.UI.ViewModel.Detail
@@ -75,6 +69,7 @@ namespace Eventplanner.UI.ViewModel.Detail
                 address = new Address();
             }
 
+            //hier nochmal anschauen da AddressId nicht Address.Id ist
             person.Address = address;
             Person = new PersonWrapper(person);
             Address = new AddressWrapper(address);

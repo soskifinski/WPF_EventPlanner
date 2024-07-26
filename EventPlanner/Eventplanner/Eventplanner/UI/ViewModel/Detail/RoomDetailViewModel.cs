@@ -3,6 +3,8 @@ using Eventplanner.UI.Data;
 using Eventplanner.UI.Wrapper;
 using Prism.Commands;
 using Prism.Events;
+using System;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
 namespace Eventplanner.UI.ViewModel.Detail
@@ -10,7 +12,9 @@ namespace Eventplanner.UI.ViewModel.Detail
     public class RoomDetailViewModel : DetailViewModelBase, IRoomDetailViewModel
     {
         private IRoomRepository _roomRepository;
+        private ILocationRepository _locationRepository;
         private RoomWrapper _room;
+        public ObservableCollection<Location> Locations { get; }
 
 
         public RoomWrapper Room
@@ -23,10 +27,12 @@ namespace Eventplanner.UI.ViewModel.Detail
             }
         }
 
-        public RoomDetailViewModel(IEventAggregator eventAggregator,
-         RoomRepository Repository) : base(eventAggregator)
+        public RoomDetailViewModel(IEventAggregator eventAggregator, IRoomRepository roomRepository, ILocationRepository locationRepository) : base(eventAggregator)
         {
-            _roomRepository = Repository;
+            _roomRepository = roomRepository;
+            _locationRepository = locationRepository;
+
+            Locations = new ObservableCollection<Location>();
         }
         public override async Task LoadAsync(int Id)
         {
@@ -37,6 +43,18 @@ namespace Eventplanner.UI.ViewModel.Detail
             this.Id = Id;
 
             InitializeRoomWrapper(room);
+            await LoadLocationsLookupAsync();
+        }
+
+        private async Task LoadLocationsLookupAsync()
+        {
+            Locations.Clear();
+            Locations.Add(new Location { Name = " - " });
+            var lookup = await _locationRepository.GetAllLocationsAsync();
+            foreach (var lookupItem in lookup)
+            {
+                Locations.Add(lookupItem);
+            }
         }
 
         private void InitializeRoomWrapper(Room room)
@@ -56,7 +74,7 @@ namespace Eventplanner.UI.ViewModel.Detail
 
                     if (args.PropertyName == nameof(Room.RoomNumber))
                     {
-                        Title = $"{Room.RoomNumber}";
+                        SetTitle();
                     }
                 };
                 ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
@@ -66,7 +84,7 @@ namespace Eventplanner.UI.ViewModel.Detail
                     // Little trick to trigger the validation
                     Room.RoomNumber = "";
                 }
-                Title = $"{Room.RoomNumber}";
+                SetTitle();
             };
 
         }
@@ -101,6 +119,10 @@ namespace Eventplanner.UI.ViewModel.Detail
             Id = Room.Id;
             var displaymember = Room.RoomNumber;
             RaiseDetailSavedEvent(Room.Id, displaymember);
+        }
+        private void SetTitle()
+        {
+            Title = Room.RoomNumber;
         }
     }
 }

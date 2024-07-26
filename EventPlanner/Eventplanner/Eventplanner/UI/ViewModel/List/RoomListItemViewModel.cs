@@ -10,6 +10,7 @@ namespace Eventplanner.UI.ViewModel.List
     public class RoomListItemViewModel : ViewModelBase
     {
         private string _roomNumber;
+        private string _location;
         private IEventAggregator _eventAggregator;
         private string _detailViewModelName;
         public ICommand OpenDetailViewCommand { get; }

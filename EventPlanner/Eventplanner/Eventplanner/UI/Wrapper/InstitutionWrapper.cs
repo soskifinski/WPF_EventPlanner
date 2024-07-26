@@ -2,9 +2,9 @@
 
 namespace Eventplanner.UI.Wrapper
 {
-    public class InstitutionWrapper : ModelWrapper<Institution>
+    public class InstitutionWrapper : ModelWrapper<Location>
     {
-        public InstitutionWrapper(Institution model) : base(model)
+        public InstitutionWrapper(Location model) : base(model)
         {
         }
         public int Id { get { return Model.Id; } }

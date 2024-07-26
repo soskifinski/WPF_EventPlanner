@@ -31,7 +31,7 @@ namespace Eventplanner.UI.Data
                      {
                          Id = m.Id,
                          RoomNumber = m.RoomNumber,
-                         Institution = m.Institution,
+                         Location = m.Location,
                          SeatsCapacity = m.SeatsCapacity,
                          Description = m.Description
                      })
