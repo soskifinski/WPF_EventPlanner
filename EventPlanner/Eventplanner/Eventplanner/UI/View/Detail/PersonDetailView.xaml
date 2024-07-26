@@ -126,18 +126,18 @@
             <TextBox Grid.Row="6"  Text="{Binding Person.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10"/>
 
             <Label Content="Straße und Hausnummer" Grid.Row="7" Margin="10 0"/>
-            <TextBox Grid.Row="8"  Text="{Binding Person.Address.StreetHouseNr, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10"/>
+            <TextBox Grid.Row="8"  Text="{Binding Address.StreetHouseNr, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10"/>
 
             <StackPanel Grid.Row="9" Orientation="Horizontal" Margin="10"  >
                 <Label Content="PLZ"  Grid.Row="10" Margin="0 0 10 0" />
-                <TextBox Text="{Binding Person.Address.PostalCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="125" Margin="0 0 10 10"/>
+                <TextBox Text="{Binding  Address.PostalCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="125" Margin="0 0 10 10"/>
                 <Label Content="Wohnort" Margin="0 0 10 0" />
-                <TextBox Text="{Binding Person.Address.City, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 10 10" Width="300"/>
+                <TextBox Text="{Binding Address.City, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 10 10" Width="300"/>
 
             </StackPanel>
             
             <Label Content="Land" Margin="10 0 10 0" Grid.Row="9"/>
-            <TextBox Grid.Row="9" Text="{Binding Person.Address.Country, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10" />
+            <TextBox Grid.Row="9" Text="{Binding Address.Country, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10" />
         </StackPanel>
 
 

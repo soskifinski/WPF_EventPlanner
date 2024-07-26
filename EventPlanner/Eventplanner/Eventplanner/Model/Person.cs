@@ -5,7 +5,7 @@ namespace Eventplanner.Model
     public class Person
     {
         public int Id { get; set; }
-
+        public Gender Gender { get; set; }
         [Required]
         [StringLength(50)]
         public string FirstName { get; set; }
@@ -17,11 +17,13 @@ namespace Eventplanner.Model
 
         [EmailAddress]
         public string Email { get; set; }
+        public int AddressId { get; set; }
         public Address Address { get; set; }
         public bool IsEmployee { get; set; }
 
         public Person()
         {
+            Address = new Address();
         }
     }  
 }

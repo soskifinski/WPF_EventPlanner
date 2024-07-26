@@ -42,10 +42,15 @@ namespace Eventplanner.UI.Startup
             builder.RegisterType<RoomDetailViewModel>()
              .Keyed<IDetailViewModel>(nameof(RoomDetailViewModel));
 
+            builder.RegisterType<ScheduleDetailViewModel>()
+            .Keyed<IDetailViewModel>(nameof(ScheduleDetailViewModel));
+
 
             builder.RegisterType<EventRepository>().As<IEventRepository>();
             builder.RegisterType<PersonRepository>().As<IPersonRepository>();
             builder.RegisterType<RoomRepository>().As<IRoomRepository>();
+            builder.RegisterType<ScheduleRepository>().As<IScheduleRepository>();
+            builder.RegisterType<AddressRepository>().As<IAddressRepository>();
 
             return builder.Build();
         }

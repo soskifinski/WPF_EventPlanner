@@ -1,8 +1,14 @@
-﻿using Eventplanner.Model;
+﻿using Eventplanner.DataAccess;
+using Eventplanner.Model;
 using Eventplanner.UI.Data;
 using Eventplanner.UI.Wrapper;
 using Prism.Commands;
 using Prism.Events;
+using System;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Net;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace Eventplanner.UI.ViewModel.Detail
@@ -10,7 +16,9 @@ namespace Eventplanner.UI.ViewModel.Detail
     public class PersonDetailViewModel : DetailViewModelBase, IPersonDetailViewModel
     {
         private IPersonRepository _personRepository;
+        private IAddressRepository _addressRepository;
         private PersonWrapper _person;
+        private AddressWrapper _address;
 
         public PersonWrapper Person
         {
@@ -22,9 +30,25 @@ namespace Eventplanner.UI.ViewModel.Detail
             }
         }
 
-        public PersonDetailViewModel(IEventAggregator eventAggregator, IPersonRepository personRepository) : base(eventAggregator)
+        public AddressWrapper Address
+        {
+            get { return _address; }
+            private set
+            {
+                _address = value;
+                if (value != null && Person != null)
+                {
+                    Person.Address = _address.Address;
+                }
+
+                OnPropertyChanged();
+            }
+        }
+
+        public PersonDetailViewModel(IEventAggregator eventAggregator, IPersonRepository personRepository, IAddressRepository addressRepository) : base(eventAggregator)
         {
             _personRepository = personRepository;
+            _addressRepository = addressRepository;
         }
 
         public override async Task LoadAsync(int personId)
@@ -34,17 +58,38 @@ namespace Eventplanner.UI.ViewModel.Detail
               : CreateNewPerson();
             Id = personId;
             InitializePerson(person);
-
         }
 
         private void InitializePerson(Person person)
         {
-            var addressWrapper = new AddressWrapper(person.Address ?? new Address());
+            Address address = new Address();
 
-
-            Person = new PersonWrapper(person)
+            if (person.Address != null)
             {
-                Address = addressWrapper
+                address = _addressRepository.FindById(person.AddressId);
+            }
+            if (address == null)
+            {
+                _addressRepository.Add(new Address());
+                _addressRepository.SaveAsync();
+                address = new Address();
+            }
+
+            person.Address = address;
+            Person = new PersonWrapper(person);
+            Address = new AddressWrapper(address);
+
+            Address.PropertyChanged += (sender, args) =>
+            {
+                if (!HasChanges)
+                {
+                    HasChanges = _addressRepository.HasChanges();
+                }
+
+                if (args.PropertyName == nameof(Address.HasErrors))
+                {
+                    ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
+                }
             };
 
             Person.PropertyChanged += (sender, args) =>
@@ -63,6 +108,7 @@ namespace Eventplanner.UI.ViewModel.Detail
                     SetTitle();
                 }
             };
+
             ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
 
             if (Person.Id == 0)
@@ -76,11 +122,9 @@ namespace Eventplanner.UI.ViewModel.Detail
 
         private Person CreateNewPerson()
         {
-            var Address = new Address();
             var Person = new Person()
             {
-                IsEmployee = false,
-                Address = Address
+                IsEmployee = false
             };
 
             _personRepository.Add(Person);
@@ -91,26 +135,30 @@ namespace Eventplanner.UI.ViewModel.Detail
         {
             Title = $"{Person.FirstName} {Person.LastName}";
         }
+
         protected override bool OnSaveCanExecute()
         {
-            return Person != null
-              && !Person.HasErrors
+            return Person != null && Address != null
+              && !Person.HasErrors && !Address.HasErrors
               && HasChanges;
         }
 
         protected override async void OnDeleteExecute()
         {
-            _personRepository.Remove(Person.Model);
+            _addressRepository.Remove(Address.Model);
+            await _addressRepository.SaveAsync();
+            _personRepository.Remove(Person.Model);            
             await _personRepository.SaveAsync();
             RaiseDetailDeletedEvent(Person.Id);
         }
         protected override async void OnSaveExecute()
         {
-            await _personRepository.SaveAsync();
-            HasChanges = _personRepository.HasChanges();
+            await _addressRepository.SaveAsync();
+            await _personRepository.SaveAsync();           
+            HasChanges = _personRepository.HasChanges() && _addressRepository.HasChanges();
             Id = Person.Id;
-            var displaymember = Person.FirstName;
-            RaiseDetailSavedEvent(Person.Id, displaymember);
+            var displayMember = $"{Person.FirstName} {Person.LastName}";
+            RaiseDetailSavedEvent(Person.Id, displayMember);
         }
     }
 }

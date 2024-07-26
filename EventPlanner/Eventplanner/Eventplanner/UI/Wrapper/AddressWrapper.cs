@@ -4,8 +4,12 @@ namespace Eventplanner.UI.Wrapper
 {
     public class AddressWrapper : ModelWrapper<Address>
     {
+        public Address Address { get; set; }
+
+
         public AddressWrapper(Address model) : base(model)
         {
+            Address = model;
         }
 
         public int Id { get { return Model.Id; } }

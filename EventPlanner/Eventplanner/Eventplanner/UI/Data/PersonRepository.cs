@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
+using System.Runtime.Remoting.Contexts;
 using System.Threading.Tasks;
 
 namespace Eventplanner.UI.Data
@@ -23,12 +25,11 @@ namespace Eventplanner.UI.Data
                 .ToListAsync();
         }
 
-        //public async Task<bool> HasEventsAsync(int Id)
-        //{
-        //    return await Context.Schedules.AsNoTracking()
-        //      .Include(m => m.Event)
-        //      .AnyAsync(m => m.Person.Id.Equals(Id));
-        //}
+        public async Task<List<Person>> GetAllEmpoyeesAsync()
+        {
+            return await Context.Set<Person>()
+                .Where(p => p.IsEmployee == true).ToListAsync();
+        }
 
         public async Task<List<Person>> GetPersonsLookupAsync()
         {
@@ -57,6 +58,13 @@ namespace Eventplanner.UI.Data
             thisPerson = Context.Set<Person>().FirstOrDefault(e => e.Id == personId);
 
             return thisPerson;
+        }
+
+        public async Task SavePersonAndAddress(Person person, Address address)
+        {
+            Context.Addresses.Attach(address);
+            Context.Persons.Add(person);
+            await  Context.SaveChangesAsync();
         }
     }
 }

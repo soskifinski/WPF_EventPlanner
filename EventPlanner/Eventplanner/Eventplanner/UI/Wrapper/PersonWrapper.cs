@@ -47,7 +47,10 @@ namespace Eventplanner.UI.Wrapper
             set { SetValue(value); }
         }
 
-        public AddressWrapper Address { get; set; }
-        
+        public Address Address
+        {
+            get { return GetValue<Address>(); }
+            set { SetValue(value); }
+        }        
     }
 }
