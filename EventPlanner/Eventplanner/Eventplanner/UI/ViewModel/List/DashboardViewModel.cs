@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Eventplanner.UI.ViewModel.Detail
 {
-    public class DashboardViewModel : ViewModelBase, IListViewModel
+    public class DashboardViewModel : ViewModelBase
     {
 
         //TODO Ticketsübersicht
