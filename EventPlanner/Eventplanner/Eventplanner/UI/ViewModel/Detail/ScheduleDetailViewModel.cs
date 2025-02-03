@@ -13,7 +13,7 @@ using System.Windows.Media;
 
 namespace Eventplanner.UI.ViewModel.Detail
 {
-    public class ScheduleDetailViewModel : DetailViewModelBase, IScheduleDetailViewModel
+    public class ScheduleDetailViewModel : DetailViewModelBase
     {
         private IScheduleRepository _scheduleRepository;
         private IPersonRepository _personRepository;
@@ -40,7 +40,7 @@ namespace Eventplanner.UI.ViewModel.Detail
         public override async Task LoadAsync(int Id)
         {
             var thisRoster = Id > 0
-              ? await _scheduleRepository.GetByIdAsync(Id)
+              ? await _scheduleRepository.FindAsync(Id)
               : CreateNewSchedule();
             this.Id = Id;
             this.Employees = await _personRepository.GetAllEmpoyeesAsync();
@@ -53,19 +53,7 @@ namespace Eventplanner.UI.ViewModel.Detail
 
             Schedule = new ScheduleWrapper(schedule) { };
 
-            Schedule.PropertyChanged += (sender, args) =>
-            {
-                if (!HasChanges)
-                {
-                    HasChanges = _scheduleRepository.HasChanges();
-                }
-
-                if (args.PropertyName == nameof(Schedule.HasErrors))
-                {
-                    ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
-                }
-            };
-            ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
+          
         }
 
         private Schedule CreateNewSchedule()
@@ -83,12 +71,12 @@ namespace Eventplanner.UI.ViewModel.Detail
         protected override async void OnDeleteExecute()
         {
             _scheduleRepository.Remove(Schedule.Model);
-            await _scheduleRepository.SaveAsync();
+            await _scheduleRepository.SaveChangesAsync();
         }
 
         protected override async void OnSaveExecute()
         {
-            await _scheduleRepository.SaveAsync();
+            await _scheduleRepository.SaveChangesAsync();
             HasChanges = _scheduleRepository.HasChanges();
         }
 

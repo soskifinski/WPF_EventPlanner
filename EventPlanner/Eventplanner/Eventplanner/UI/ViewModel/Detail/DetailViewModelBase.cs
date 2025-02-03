@@ -1,5 +1,4 @@
 ﻿using Eventplanner.UI.Events;
-using FriendOrganizer.UI.ViewModel;
 using Prism.Commands;
 using Prism.Events;
 using System.Threading.Tasks;
@@ -7,12 +6,11 @@ using System.Windows.Input;
 
 namespace Eventplanner.UI.ViewModel.Detail
 {
-    public abstract class DetailViewModelBase : ViewModelBase, IDetailViewModel
+    public abstract class DetailViewModelBase : ViewModelValidationBase, IDetailViewModel
     {
         private bool _hasChanges;
         protected readonly IEventAggregator EventAggregator;
         private int _id;
-        private string _title;
 
         public abstract Task LoadAsync(int id);
         protected abstract void OnDeleteExecute();
@@ -35,30 +33,7 @@ namespace Eventplanner.UI.ViewModel.Detail
             get { return _id; }
             protected set { _id = value; }
         }
-
-        public string Title
-        {
-            get { return _title; }
-            protected set
-            {
-                _title = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public bool HasChanges
-        {
-            get { return _hasChanges; }
-            set
-            {
-                if (_hasChanges != value)
-                {
-                    _hasChanges = value;
-                    OnPropertyChanged();
-                    ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
-                }
-            }
-        }
+     
 
         protected virtual void OnCloseDetailViewExecute()
         {

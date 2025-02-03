@@ -21,7 +21,7 @@ namespace Eventplanner.UI.Data
 
         public async Task<List<Schedule>> GetAllSchedulesAsync()
         {
-            return await Context.Set<Schedule>()
+            return await _context.Set<Schedule>()
                 .ToListAsync();
         }
 
@@ -42,7 +42,7 @@ namespace Eventplanner.UI.Data
 
         public async Task<bool> HasAppointmentsAsync(int Id)
         {
-            return await Context.Schedules.AsNoTracking()
+            return await _context.Schedules.AsNoTracking()
                 .Where(m => m.Appointments.Any(a => a.Person.Id.Equals(Id)))
                 .AnyAsync();
         }

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Threading.Tasks;
 
 namespace Eventplanner.UI.Data
@@ -19,8 +20,7 @@ namespace Eventplanner.UI.Data
 
         public async Task<List<Event>> GetAllEventsAsync()
         {
-            return await Context.Set<Event>()
-                .ToListAsync();
+            return await _context.Set<Event>().ToListAsync();
         }
 
         public async Task<List<Event>> GetEventsLookupAsync()
@@ -47,10 +47,7 @@ namespace Eventplanner.UI.Data
 
         public Event FindById(int eventId)
         {
-            Event thisEvent = null;
-            thisEvent = Context.Set<Event>().FirstOrDefault(e => e.Id == eventId);
-            
-            return thisEvent;
+            return _context.Set<Event>().FirstOrDefault(e => e.Id == eventId);
         }
     }
 }

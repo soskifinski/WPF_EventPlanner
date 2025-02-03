@@ -2,7 +2,6 @@
 using Eventplanner.UI.Events;
 using Eventplanner.UI.ViewModel.Detail;
 using Eventplanner.UI.ViewModel.List;
-using FriendOrganizer.UI.ViewModel;
 using Prism.Commands;
 using Prism.Events;
 using System;
@@ -10,23 +9,50 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace Eventplanner.UI.ViewModel
 {
     public class MainWindowViewModel : ViewModelBase
     {
-
         private IEventAggregator _eventAggregator;
+
+        #region Constructor
+
+        public MainWindowViewModel(IIndex<string, IListViewModel> listViewModelCreator,
+          IIndex<string, IDetailViewModel> detailViewModelCreator,
+          IEventAggregator eventAggregator)
+        {
+
+            _eventAggregator = eventAggregator;
+            _listViewModelCreator = listViewModelCreator;
+            _detailViewModelCreator = detailViewModelCreator;
+
+            DashboardViewModel dashboardViewModel = new DashboardViewModel();
+
+            DetailViewModels = new ObservableCollection<IDetailViewModel>();
+            CreateNewDetailCommand = new DelegateCommand<Type>(OnCreateNewDetailExecute);
+            OpenSingleDetailViewCommand = new DelegateCommand<Type>(OnOpenSingleDetailViewExecute);
+
+            ListViewModels = new ObservableCollection<IListViewModel>();
+            NavigateToCommand = new DelegateCommand<Type>(Navigate);
+
+            _eventAggregator.GetEvent<OpenDetailViewEvent>()
+                .Subscribe(OnOpenDetailView);
+            _eventAggregator.GetEvent<AfterDetailDeletedEvent>()
+              .Subscribe(AfterDetailDeleted);
+            _eventAggregator.GetEvent<AfterDetailClosedEvent>()
+              .Subscribe(AfterDetailClosed);
+        }
+
+        #endregion
+        #region Properties
+
         private IDetailViewModel _selectedDetailViewModel;
         private IListViewModel _selectedListViewModel;
         private IIndex<string, IDetailViewModel> _detailViewModelCreator;
         private IIndex<string, IListViewModel> _listViewModelCreator;
         private int nextNewItemId = 0;
 
-        public ICommand CreateNewDetailCommand { get; }
-        public ICommand NavigateToCommand { get; }
-        public ICommand OpenSingleDetailViewCommand { get; }
         public ObservableCollection<IDetailViewModel> DetailViewModels { get; }
         public ObservableCollection<IListViewModel> ListViewModels { get; }
 
@@ -51,29 +77,25 @@ namespace Eventplanner.UI.ViewModel
             }
         }
 
-        public MainWindowViewModel(IIndex<string, IListViewModel> listViewModelCreator,
-          IIndex<string, IDetailViewModel> detailViewModelCreator,
-          IEventAggregator eventAggregator)
+        private object _selectedMenuItem;
+        public object SelectedMenuItem
         {
-
-            _eventAggregator = eventAggregator;
-            _listViewModelCreator = listViewModelCreator;
-            _detailViewModelCreator = detailViewModelCreator;
-
-            DetailViewModels = new ObservableCollection<IDetailViewModel>();
-            CreateNewDetailCommand = new DelegateCommand<Type>(OnCreateNewDetailExecute);
-            OpenSingleDetailViewCommand = new DelegateCommand<Type>(OnOpenSingleDetailViewExecute);
-
-            ListViewModels = new ObservableCollection<IListViewModel>();
-            NavigateToCommand = new DelegateCommand<Type>(Navigate);
-
-            _eventAggregator.GetEvent<OpenDetailViewEvent>()
-                .Subscribe(OnOpenDetailView);
-            _eventAggregator.GetEvent<AfterDetailDeletedEvent>()
-              .Subscribe(AfterDetailDeleted);
-            _eventAggregator.GetEvent<AfterDetailClosedEvent>()
-              .Subscribe(AfterDetailClosed);
+            get { return _selectedMenuItem; }
+            set
+            {
+                _selectedMenuItem = value;
+                OnPropertyChanged(nameof(SelectedMenuItem));
+            }
         }
+
+        #endregion
+
+        #region Commands
+
+        public ICommand CreateNewDetailCommand { get; }
+        public ICommand NavigateToCommand { get; }
+        public ICommand OpenSingleDetailViewCommand { get; }
+
 
         private void OnOpenSingleDetailViewExecute(Type viewModelType)
         {
@@ -94,6 +116,7 @@ namespace Eventplanner.UI.ViewModel
                     Id = -1,
                     ViewModelName = viewModelType.Name
                 });
+
         }
 
         private void OnCreateNewDetailExecute(Type viewModelType)
@@ -108,8 +131,22 @@ namespace Eventplanner.UI.ViewModel
 
         public async Task LoadAsync()
         {
-
+            SelectedListViewModel = null;
+           
         }
+        #endregion
+
+        #region Events
+        #endregion
+
+
+
+
+
+
+
+
+
 
         private async void OnOpenDetailView(OpenDetailViewEventArgs args)
         {

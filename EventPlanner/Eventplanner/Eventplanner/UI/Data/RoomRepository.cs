@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Threading.Tasks;
 
 namespace Eventplanner.UI.Data
@@ -17,7 +18,7 @@ namespace Eventplanner.UI.Data
 
         public async Task<List<Room>> GetAllRoomsAsync()
         {
-            return await Context.Set<Room>()
+            return await _context.Set<Room>()
                 .ToListAsync();
         }
 
@@ -42,14 +43,14 @@ namespace Eventplanner.UI.Data
 
         public async Task<bool> IsReferenceByEventAsync(int Id)
         {
-            return await Context.Events.AsNoTracking()
+            return await _context.Events.AsNoTracking()
                 .AnyAsync(f => f.RoomId == Id);
         }
 
         public Room FindById(int id)
         {
             Room room = null;
-            room = Context.Set<Room>().FirstOrDefault(e => e.Id == id);
+            room = _context.Set<Room>().FirstOrDefault(e => e.Id == id);
 
             return room;
         }

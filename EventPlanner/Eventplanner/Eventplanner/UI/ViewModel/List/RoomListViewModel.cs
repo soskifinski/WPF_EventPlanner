@@ -2,7 +2,6 @@
 using Eventplanner.UI.Data;
 using Eventplanner.UI.Events;
 using Eventplanner.UI.ViewModel.Detail;
-using FriendOrganizer.UI.ViewModel;
 using Prism.Events;
 using System.Collections.ObjectModel;
 using System.Linq;

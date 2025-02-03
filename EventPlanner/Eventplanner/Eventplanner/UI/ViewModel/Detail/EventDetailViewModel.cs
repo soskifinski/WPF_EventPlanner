@@ -1,5 +1,4 @@
-﻿using Eventplanner.DataAccess;
-using Eventplanner.Model;
+﻿using Eventplanner.Model;
 using Eventplanner.UI.Data;
 using Eventplanner.UI.Events;
 using Eventplanner.UI.Wrapper;
@@ -12,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Eventplanner.UI.ViewModel.Detail
 {
-    public class EventDetailViewModel : DetailViewModelBase, IEventDetailViewModel
+    public class EventDetailViewModel : DetailViewModelBase
     {
         private IEventRepository _eventRepository;
         private IRoomRepository _roomRepo;
@@ -61,7 +60,7 @@ namespace Eventplanner.UI.ViewModel.Detail
         public override async Task LoadAsync(int eventId)
         {
             var thisEvent = eventId > 0
-              ? await _eventRepository.GetByIdAsync(eventId)
+              ? await _eventRepository.FindAsync(eventId)
               : CreateNewEvent();
 
             Id = eventId;
@@ -104,37 +103,12 @@ namespace Eventplanner.UI.ViewModel.Detail
         private void InitializeEvent(Event newEvent)
         {
             Event = new EventWrapper(newEvent);
-
-            Event.PropertyChanged += (sender, args) =>
-            {
-                if (!HasChanges)
-                {
-                    HasChanges = _eventRepository.HasChanges();
-                }
-
-                if (args.PropertyName == nameof(Event.HasErrors))
-                {
-                    ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
-                }
-                if (args.PropertyName == nameof(Event.Title))
-                {
-                    SetTitle();
-                }
-            };
-            ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
-
-            if (Event.Id == 0)
-            {
-                // Little trick to trigger the validation
-                Event.Title = "";
-            }
-            SetTitle();
         }
 
 
         private void SetTitle()
         {
-            Title = Event.Title;
+            DisplayName = Event.Title;
         }
 
         protected override bool OnSaveCanExecute()
@@ -144,7 +118,7 @@ namespace Eventplanner.UI.ViewModel.Detail
 
         protected override async void OnSaveExecute()
         {
-            await _eventRepository.SaveAsync();
+            await _eventRepository.SaveChangesAsync();
             HasChanges = _eventRepository.HasChanges();
             Id = Event.Id;
             RaiseDetailSavedEvent(Event.Id, Event.Title);
@@ -164,8 +138,7 @@ namespace Eventplanner.UI.ViewModel.Detail
             //if (result == MessageDialogResult.OK)
             //{
             _eventRepository.Remove(Event.Model);
-            await _eventRepository.SaveAsync();
-            RaiseDetailDeletedEvent(Event.Id);
+            await _eventRepository.SaveChangesAsync();
             //}
         }
 

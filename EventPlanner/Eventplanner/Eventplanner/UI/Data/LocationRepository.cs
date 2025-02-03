@@ -17,8 +17,7 @@ namespace Eventplanner.UI.Data
 
         public async Task<List<Location>> GetAllLocationsAsync()
         {
-            return await Context.Set<Location>()
-                .ToListAsync();
+            return await _context.Locations.ToListAsync();
         }
 
         public async Task<List<Location>> GetLocationsLookupAsync()
@@ -41,14 +40,14 @@ namespace Eventplanner.UI.Data
 
         public async Task<bool> IsReferenceByRoomAsync(int Id)
         {
-            return await Context.Rooms.AsNoTracking()
+            return await _context.Rooms.AsNoTracking()
                 .AnyAsync(f => f.LocationId == Id);
         }
 
         public Room FindById(int id)
         {
             Room room = null;
-            room = Context.Set<Room>().FirstOrDefault(e => e.Id == id);
+            room = _context.Rooms.FirstOrDefault(e => e.Id == id);
 
             return room;
         }

@@ -46,7 +46,7 @@ namespace Eventplanner.UI.Startup
             .Keyed<IDetailViewModel>(nameof(ScheduleDetailViewModel));
 
             builder.RegisterType<DashboardViewModel>()
-            .Keyed<IDetailViewModel>(nameof(DashboardViewModel));
+            .Keyed<IListViewModel>(nameof(DashboardViewModel));
 
 
             builder.RegisterType<EventRepository>().As<IEventRepository>();

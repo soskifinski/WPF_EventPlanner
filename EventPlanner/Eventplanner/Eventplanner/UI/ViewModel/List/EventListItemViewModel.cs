@@ -1,6 +1,5 @@
 ﻿using Eventplanner.Model;
 using Eventplanner.UI.Events;
-using FriendOrganizer.UI.ViewModel;
 using Prism.Commands;
 using Prism.Events;
 using System.Windows.Input;

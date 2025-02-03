@@ -1,4 +1,4 @@
-﻿using FriendOrganizer.UI.ViewModel;
+﻿using Eventplanner.UI.ViewModel;
 using System.ComponentModel;
 using System;
 using System.Collections;

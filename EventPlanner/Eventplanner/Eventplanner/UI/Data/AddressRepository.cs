@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,8 +20,7 @@ namespace Eventplanner.UI.Data
         }
         public async Task<List<Address>> GetAllAddressesAsync()
         {
-            return await Context.Set<Address>()
-                .ToListAsync();
+            return await _context.Addresses.ToListAsync();
         }
 
         public async Task<List<Address>> GetAddressLookupAsync()
@@ -45,7 +45,7 @@ namespace Eventplanner.UI.Data
         public Address FindById(int addressId)
         {
             Address address = null;
-            address = Context.Set<Address>().FirstOrDefault(e => e.Id == addressId);
+            address = _context.Addresses.FirstOrDefault(e => e.Id == addressId);
 
             return address;
         }

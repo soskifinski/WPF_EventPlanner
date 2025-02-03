@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Eventplanner.UI.View"  
+        xmlns:local="clr-namespace:Eventplanner.UI"  
         xmlns:view="clr-namespace:Eventplanner.UI.View"
          xmlns:viewDetail="clr-namespace:Eventplanner.UI.View.Detail"
         xmlns:viewList="clr-namespace:Eventplanner.UI.View.List"
@@ -11,35 +11,41 @@
         xmlns:viewModelList="clr-namespace:Eventplanner.UI.ViewModel.List"
          xmlns:viewModelDetail="clr-namespace:Eventplanner.UI.ViewModel.Detail"
         mc:Ignorable="d"
-        Title="EventPlanner" Height="1000" Width="1000"  WindowStartupLocation="CenterScreen" FontSize="15" 
+        Title="EventPlanner" Height="700" Width="800"  WindowStartupLocation="CenterScreen" FontSize="15" 
         d:DataContext="{d:DesignInstance Type=viewModel:MainWindowViewModel}"
        >
 
     <Window.Resources>
-        <DataTemplate DataType="{x:Type viewModelDetail:DashboardViewModel}">
-            <viewDetail:DashboardView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewModelDetail:EventDetailViewModel}">
-            <viewDetail:EventDetailView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewModelDetail:PersonDetailViewModel}">
-            <viewDetail:PersonDetailView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewModelDetail:RoomDetailViewModel}">
-            <viewDetail:RoomDetailView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewModelDetail:ScheduleDetailViewModel}">
-            <viewDetail:ScheduleView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewModelList:EventListViewModel}">
-            <viewList:EventListView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewModelList:PersonListViewModel}">
-            <viewList:PersonListView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewModelList:RoomListViewModel}">
-            <viewList:RoomListView/>
-        </DataTemplate>
+        <ResourceDictionary>
+            <!--<ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/BaseStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>-->
+            <DataTemplate DataType="{x:Type viewModelDetail:DashboardViewModel}">
+                <viewDetail:DashboardView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModelDetail:EventDetailViewModel}">
+                <viewDetail:EventDetailView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModelDetail:PersonDetailViewModel}">
+                <viewDetail:PersonDetailView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModelDetail:RoomDetailViewModel}">
+                <viewDetail:RoomDetailView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModelDetail:ScheduleDetailViewModel}">
+                <viewDetail:ScheduleView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModelList:EventListViewModel}">
+                <viewList:EventListView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModelList:PersonListViewModel}">
+                <viewList:PersonListView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModelList:RoomListViewModel}">
+                <viewList:RoomListView/>
+            </DataTemplate>
+            <!--weitere ViewModels-Views-Beziehungen werden hier eingebunden: -->
+        </ResourceDictionary>
     </Window.Resources>
     <Grid>
        
@@ -89,8 +95,8 @@
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding Title}"/>
-                        <TextBlock Text="*" Visibility="{Binding HasChanges,
-                    Converter={StaticResource booleanToVisibilityConverter}}"/>
+                        <!--<TextBlock Text="*" Visibility="{Binding HasChanges,
+                    Converter={StaticResource booleanToVisibilityConverter}}"/>-->
                         <Button Command="{Binding CloseDetailViewCommand}"  Content="X"  FontSize="15"   Margin="10 0" BorderBrush="Transparent"/>
                     </StackPanel>
                 </DataTemplate>

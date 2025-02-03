@@ -19,13 +19,13 @@ namespace Eventplanner.UI.Data
 
         public async Task<List<Person>> GetAllPersonsAsync()
         {
-            return await Context.Set<Person>()
+            return await _context.Set<Person>()
                 .ToListAsync();
         }
 
         public async Task<List<Person>> GetAllEmpoyeesAsync()
         {
-            return await Context.Set<Person>()
+            return await _context.Set<Person>()
                 .Where(p => p.IsEmployee == true).ToListAsync();
         }
 
@@ -54,16 +54,16 @@ namespace Eventplanner.UI.Data
         public Person FindById(int personId)
         {
             Person thisPerson = null;
-            thisPerson = Context.Set<Person>().FirstOrDefault(e => e.Id == personId);
+            thisPerson = _context.Persons.FirstOrDefault(e => e.Id == personId);
 
             return thisPerson;
         }
 
         public async Task SavePersonAndAddress(Person person, Address address)
         {
-            Context.Addresses.Attach(address);
-            Context.Persons.Add(person);
-            await  Context.SaveChangesAsync();
+            _context.Addresses.Attach(address);
+            _context.Persons.Add(person);
+            await _context.SaveChangesAsync();
         }
     }
 }

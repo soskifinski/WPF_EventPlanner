@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Eventplanner.UI.ViewModel.Detail
 {
-    public class RoomDetailViewModel : DetailViewModelBase, IRoomDetailViewModel
+    public class RoomDetailViewModel : DetailViewModelBase
     {
         private IRoomRepository _roomRepository;
         private ILocationRepository _locationRepository;
@@ -37,7 +37,7 @@ namespace Eventplanner.UI.ViewModel.Detail
         public override async Task LoadAsync(int Id)
         {
             var room = Id > 0
-              ? await _roomRepository.GetByIdAsync(Id)
+              ? await _roomRepository.FindAsync(Id)
               : CreateNewRoom();
 
             this.Id = Id;
@@ -101,7 +101,7 @@ namespace Eventplanner.UI.ViewModel.Detail
         protected override async void OnDeleteExecute()
         {
             _roomRepository.Remove(Room.Model);
-            await _roomRepository.SaveAsync();
+            await _roomRepository.SaveChangesAsync();
             RaiseDetailDeletedEvent(Room.Id);
         }
 
@@ -114,7 +114,7 @@ namespace Eventplanner.UI.ViewModel.Detail
 
         protected override async void OnSaveExecute()
         {
-            await _roomRepository.SaveAsync();
+            await _roomRepository.SaveChangesAsync();
             HasChanges = _roomRepository.HasChanges();
             Id = Room.Id;
             var displaymember = Room.RoomNumber;
@@ -122,7 +122,7 @@ namespace Eventplanner.UI.ViewModel.Detail
         }
         private void SetTitle()
         {
-            Title = Room.RoomNumber;
+            DisplayName = Room.RoomNumber;
         }
     }
 }

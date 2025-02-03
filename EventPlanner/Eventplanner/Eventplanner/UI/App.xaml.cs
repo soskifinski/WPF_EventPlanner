@@ -20,14 +20,14 @@ namespace Eventplanner.UI
             mainWindow.Show();
         }
 
-        private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
-        {
+        //private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        //{
 
-            MessageBox.Show("Ein unvorhergesehener Fehler ist aufgetreten. Bitte Informieren Sie den Administrator."
-        + Environment.NewLine + e.Exception.Message, "Unexpected error");
+        //    MessageBox.Show("Ein unvorhergesehener Fehler ist aufgetreten. Bitte Informieren Sie den Administrator."
+        //+ Environment.NewLine + e.Exception.Message, "Unexpected error");
 
-            e.Handled = true;
-
-        }
+        //    e.Handled = true;
+        //    return;
+        //}
     }
 }

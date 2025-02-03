@@ -39,7 +39,7 @@
                                 <Setter Property="FontWeight" Value="Bold"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="FontWeight" Value="Normal"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
