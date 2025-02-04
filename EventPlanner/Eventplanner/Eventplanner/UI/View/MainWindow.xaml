@@ -11,16 +11,17 @@
         xmlns:viewModelList="clr-namespace:Eventplanner.UI.ViewModel.List"
          xmlns:viewModelDetail="clr-namespace:Eventplanner.UI.ViewModel.Detail"
         mc:Ignorable="d"
-        Title="EventPlanner" Height="700" Width="800"  WindowStartupLocation="CenterScreen" FontSize="15" 
-        d:DataContext="{d:DesignInstance Type=viewModel:MainWindowViewModel}"
-       >
+        Topmost="True" Background="Transparent"
+        Width="1200" Height="800" ResizeMode="CanResize"
+        Title="EventPlanner" WindowStartupLocation="CenterScreen" FontSize="15" 
+        d:DataContext="{d:DesignInstance Type=viewModel:MainWindowViewModel}">
 
     <Window.Resources>
         <ResourceDictionary>
             <!--<ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/BaseStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>-->
-            <DataTemplate DataType="{x:Type viewModelDetail:DashboardViewModel}">
+            <DataTemplate x:Key="DashboardTemplate" DataType="{x:Type viewModelDetail:DashboardViewModel}">
                 <viewDetail:DashboardView/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModelDetail:EventDetailViewModel}">
@@ -47,60 +48,64 @@
             <!--weitere ViewModels-Views-Beziehungen werden hier eingebunden: -->
         </ResourceDictionary>
     </Window.Resources>
-    <Grid>
-       
+    <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="120"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300"/>
-            <ColumnDefinition />
-            <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
-   
-        <Menu Grid.Column="0" Background="	#E0EEEE" FontSize="30"  Padding="25">
-            <MenuItem Header="Eventplanner" Foreground="#262626" FontWeight="Bold" Command="{Binding CreateNewDetailCommand}"
-  CommandParameter="{x:Type viewModelDetail:DashboardViewModel}" />
-        </Menu>
-        <Menu Grid.Column="1" FontSize="15" Background="#E0EEEE" Foreground="#787878"  Padding="25">
-            <MenuItem Header="+ Neu">
-                <MenuItem Header="+ neues Event"  Command="{Binding CreateNewDetailCommand}"
-  CommandParameter="{x:Type viewModelDetail:EventDetailViewModel}"/>
-                <MenuItem Header="+ neue Person"  Command="{Binding CreateNewDetailCommand}"
-                  CommandParameter="{x:Type viewModelDetail:PersonDetailViewModel}" />
-                <MenuItem Header="+ neuer Raum"  Command="{Binding CreateNewDetailCommand}"
-                  CommandParameter="{x:Type viewModelDetail:RoomDetailViewModel}" />
-            </MenuItem>
-            <MenuItem Header="Events"  Command="{Binding NavigateToCommand}" CommandParameter="{x:Type viewModelList:EventListViewModel}"/>
-            <MenuItem Header="Kontakte"  Command="{Binding NavigateToCommand}" CommandParameter="{x:Type viewModelList:PersonListViewModel}" />
-            <MenuItem Header="Räume"  Command="{Binding NavigateToCommand}" CommandParameter="{x:Type viewModelList:RoomListViewModel}" />
-            <MenuItem Header="Dienstplan" Command="{Binding OpenSingleDetailViewCommand}"
-                     CommandParameter="{x:Type viewModelDetail:ScheduleDetailViewModel}" />
-        </Menu>
-        <Menu Grid.Column="1" Background="#E0EEEE" FontSize="15" HorizontalAlignment="Right" Foreground="#787878"  Padding="25" >
-            <MenuItem Header="Profil" FontWeight="Bold" />
-        </Menu>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Menu Background="	#E0EEEE" FontSize="30" Padding="25">
+                <MenuItem Header="Eventplanner" Foreground="#262626" FontWeight="Bold" Command="{Binding OpenDashboardViewCommand}" CommandParameter="{x:Type viewModelDetail:DashboardViewModel}" />
+            </Menu>
+            <Menu Grid.Column="1" FontSize="15" Background="#E0EEEE" Foreground="#787878"  Padding="25">
+                <MenuItem Header="+ Neu">
+                    <MenuItem Header="+ neues Event"  Command="{Binding CreateNewDetailCommand}" CommandParameter="{x:Type viewModelDetail:EventDetailViewModel}"/>
+                    <MenuItem Header="+ neue Person"  Command="{Binding CreateNewDetailCommand}" CommandParameter="{x:Type viewModelDetail:PersonDetailViewModel}" />
+                    <MenuItem Header="+ neuer Raum"  Command="{Binding CreateNewDetailCommand}"  CommandParameter="{x:Type viewModelDetail:RoomDetailViewModel}" />
+                </MenuItem>
+
+                <MenuItem Header="Events"  Command="{Binding NavigateToCommand}" CommandParameter="{x:Type viewModelList:EventListViewModel}"/>
+                <MenuItem Header="Kontakte"  Command="{Binding NavigateToCommand}" CommandParameter="{x:Type viewModelList:PersonListViewModel}" />
+                <MenuItem Header="Räume"  Command="{Binding NavigateToCommand}" CommandParameter="{x:Type viewModelList:RoomListViewModel}" />
+                <MenuItem Header="Dienstplan" Command="{Binding OpenSingleDetailViewCommand}" CommandParameter="{x:Type viewModelDetail:ScheduleDetailViewModel}" />
+            </Menu>
+            <Menu Grid.Column="1" Background="#E0EEEE" FontSize="15" HorizontalAlignment="Right" Foreground="#787878"  Padding="25" >
+                <MenuItem Header="Profil" FontWeight="Bold" />
+            </Menu>
+        </Grid>
         
-        <ContentControl Grid.Row="1" Grid.Column="0" Content="{Binding SelectedListViewModel}" Margin="10" />
-       
+        <Grid Grid.Row="1" Width="Auto" Margin="12,20">
+            <ContentControl Content="{Binding Dashboard}" ContentTemplate="{StaticResource DashboardTemplate}"/>
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <ContentControl Grid.Row="1" Grid.Column="0" Content="{Binding SelectedListViewModel}" Margin="10" />
+            <TabControl Grid.Row="2" Grid.Column="1" ItemsSource="{Binding DetailViewModels}" SelectedItem="{Binding SelectedDetailViewModel,Mode=TwoWay}" BorderBrush="Transparent" Margin="20"> 
+                <TabControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Title}"/>
+                            <!--<TextBlock Text="*" Visibility="{Binding HasChanges,
+            Converter={StaticResource booleanToVisibilityConverter}}"/>-->
+                            <Button Command="{Binding CloseDetailViewCommand}"  Content="X"  FontSize="15"   Margin="10 0" BorderBrush="Transparent"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </TabControl.ItemTemplate>
+            </TabControl>
+        </Grid>
+            
         
-        
-        <TabControl Grid.Row="1" Grid.Column="1" 
-        ItemsSource="{Binding DetailViewModels}"
-        SelectedItem="{Binding SelectedDetailViewModel,Mode=TwoWay}" BorderBrush="Transparent" Margin="20">
-            <TabControl.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Title}"/>
-                        <!--<TextBlock Text="*" Visibility="{Binding HasChanges,
-                    Converter={StaticResource booleanToVisibilityConverter}}"/>-->
-                        <Button Command="{Binding CloseDetailViewCommand}"  Content="X"  FontSize="15"   Margin="10 0" BorderBrush="Transparent"/>
-                    </StackPanel>
-                </DataTemplate>
-            </TabControl.ItemTemplate>
-        </TabControl>
     </Grid>
 </Window>

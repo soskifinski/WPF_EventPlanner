@@ -27,7 +27,8 @@ namespace Eventplanner.UI.ViewModel
             _listViewModelCreator = listViewModelCreator;
             _detailViewModelCreator = detailViewModelCreator;
 
-            DashboardViewModel dashboardViewModel = new DashboardViewModel();
+            Dashboard = new DashboardViewModel();
+           
 
             DetailViewModels = new ObservableCollection<IDetailViewModel>();
             CreateNewDetailCommand = new DelegateCommand<Type>(OnCreateNewDetailExecute);
@@ -46,6 +47,8 @@ namespace Eventplanner.UI.ViewModel
 
         #endregion
         #region Properties
+        public DashboardViewModel Dashboard {  get; set; }
+
 
         private IDetailViewModel _selectedDetailViewModel;
         private IListViewModel _selectedListViewModel;
@@ -133,6 +136,20 @@ namespace Eventplanner.UI.ViewModel
         {
             SelectedListViewModel = null;
            
+        }
+
+        public ICommand OpenDashboardViewCommand { get; }
+
+
+        private void OpenDashboardViewExecute(Type viewModelType)
+        {
+            SelectedListViewModel = null;
+            OnOpenDetailView(
+              new OpenDetailViewEventArgs
+              {
+                  Id = -1,
+                  ViewModelName = viewModelType.Name
+              });
         }
         #endregion
 
