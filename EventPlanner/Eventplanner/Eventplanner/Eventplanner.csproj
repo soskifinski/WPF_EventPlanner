@@ -175,6 +175,8 @@
     <Compile Include="Model\ServiceTask.cs" />
     <Compile Include="Model\Location.cs" />
     <Compile Include="UI\Converter\BoolToVisibilityConverter.cs" />
+    <Compile Include="UI\Converter\EnumHelper.cs" />
+    <Compile Include="UI\Converter\EnumToCollectionConverter.cs" />
     <Compile Include="UI\Converter\GenderToBoolConverter.cs" />
     <Compile Include="UI\Converter\IntToBoolConverter.cs" />
     <Compile Include="UI\Data\AddressRepository.cs" />
