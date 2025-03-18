@@ -1,0 +1,9 @@
+C:\Workspaces\Tutorials\WPF_EventPlanner\EventPlanner\Eventplanner\IRepositorys\bin\Debug\Interfaces.dll
+C:\Workspaces\Tutorials\WPF_EventPlanner\EventPlanner\Eventplanner\IRepositorys\bin\Debug\Interfaces.pdb
+C:\Workspaces\Tutorials\WPF_EventPlanner\EventPlanner\Eventplanner\IRepositorys\bin\Debug\Models.dll
+C:\Workspaces\Tutorials\WPF_EventPlanner\EventPlanner\Eventplanner\IRepositorys\bin\Debug\Models.pdb
+C:\Workspaces\Tutorials\WPF_EventPlanner\EventPlanner\Eventplanner\IRepositorys\obj\Debug\Interfaces.csproj.AssemblyReference.cache
+C:\Workspaces\Tutorials\WPF_EventPlanner\EventPlanner\Eventplanner\IRepositorys\obj\Debug\Interfaces.csproj.CoreCompileInputs.cache
+C:\Workspaces\Tutorials\WPF_EventPlanner\EventPlanner\Eventplanner\IRepositorys\obj\Debug\Interfaces.csproj.Up2Date
+C:\Workspaces\Tutorials\WPF_EventPlanner\EventPlanner\Eventplanner\IRepositorys\obj\Debug\Interfaces.dll
+C:\Workspaces\Tutorials\WPF_EventPlanner\EventPlanner\Eventplanner\IRepositorys\obj\Debug\Interfaces.pdb

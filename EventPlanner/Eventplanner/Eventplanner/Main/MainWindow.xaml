@@ -1,0 +1,90 @@
+﻿<Window x:Class="Eventplanner.UI.Main.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModel="clr-namespace:Eventplanner.UI.Main"
+        xmlns:vDashboard="clr-namespace:Eventplanner.UI.Dashboard.View"
+        xmlns:vMDashboard="clr-namespace:Eventplanner.UI.Dashboard.ViewModel"
+        xmlns:vEvent="clr-namespace:Eventplanner.UI.Event.View"
+        xmlns:vMEvent="clr-namespace:Eventplanner.UI.Event.ViewModel"
+        xmlns:vRoom="clr-namespace:Eventplanner.UI.Room.View"
+        xmlns:vMRoom="clr-namespace:Eventplanner.UI.Room.ViewModel"
+        xmlns:vPerson="clr-namespace:Eventplanner.UI.Person.View"
+        xmlns:vMPerson="clr-namespace:Eventplanner.UI.Person.ViewModel"
+        xmlns:vSchedule="clr-namespace:Eventplanner.UI.Schedule.View"
+        xmlns:vMSchedule="clr-namespace:Eventplanner.UI.Schedule.ViewModel"
+        mc:Ignorable="d"
+        Topmost="True" Background="Transparent"
+        Width="1200" Height="800" ResizeMode="CanResize"
+        Title="EventPlanner" WindowStartupLocation="CenterScreen" FontSize="15" 
+        d:DataContext="{d:DesignInstance Type=viewModel:MainWindowViewModel}">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <!--<ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/BaseStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>-->
+           
+            <DataTemplate DataType="{x:Type vMEvent:EventMainViewModel}">
+                <vEvent:EventMainView/>
+            </DataTemplate>
+
+         
+            <DataTemplate DataType="{x:Type vMRoom:RoomMainViewModel}">
+                <vRoom:RoomMainView/>
+            </DataTemplate>
+
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Menu Background="	#E0EEEE" FontSize="30" Padding="25">
+                <MenuItem Header="Plan C" Foreground="#262626" FontWeight="Bold" Command="{Binding OpenDashboardViewCommand}" />
+            </Menu>
+            <Menu Grid.Column="1" FontSize="15" Background="#E0EEEE" Foreground="#787878"  Padding="25" >
+                <!--<ctl:LZButton Content="Speichern" Command="{Binding SaveCommand}" IconTemplate="{StaticResource SaveIconTemplate}"/>-->
+                <MenuItem Header="Mein Dienstplan" Command="{Binding OpenMyScheduleCommand}"/>
+            </Menu>
+            <Menu Grid.Column="1" Background="#E0EEEE" FontSize="15" HorizontalAlignment="Right" Foreground="#787878"  Padding="25" >
+                <MenuItem Header="Einstellungen" FontWeight="Bold" />
+            </Menu>
+        </Grid>
+        
+        <Grid Grid.Row="1" Width="Auto" Margin="12,20">
+        
+        </Grid>
+
+        <Grid Grid.Row="1" Margin="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Background="#FFB4C7E7" Orientation="Vertical" VerticalAlignment="Top">
+                <Button Command="{Binding NavigateToCommand}">Veranstaltungen</Button>
+                <Button Command="{Binding NavigateToCommand}">Kontakte</Button>
+                <Button Command="{Binding NavigateToCommand}">Räume</Button>
+                <Button Command="{Binding NavigateToCommand}">Workflow</Button>
+            </StackPanel>
+
+                <Grid Grid.Column="1" Background="#FFF5F5F5">
+                <ContentControl Content="{Binding Dashboard}" ContentTemplate="{StaticResource DashboardTemplate}"/>
+            </Grid>
+
+        </Grid>
+        
+
+    </Grid>
+</Window>

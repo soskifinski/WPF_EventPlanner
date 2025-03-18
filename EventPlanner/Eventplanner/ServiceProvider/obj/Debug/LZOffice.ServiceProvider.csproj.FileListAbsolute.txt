@@ -1,0 +1,8 @@
+C:\Workspaces\LZ-Office-1\bin\Debug\LZOffice.ServiceProvider.dll.config
+C:\Workspaces\LZ-Office-1\bin\Debug\LZOffice.ServiceProvider.dll
+C:\Workspaces\LZ-Office-1\bin\Debug\LZOffice.ServiceProvider.pdb
+C:\Workspaces\LZ-Office-1\LZOffice.ServiceProvider\obj\Debug\LZOffice.ServiceProvider.csproj.AssemblyReference.cache
+C:\Workspaces\LZ-Office-1\LZOffice.ServiceProvider\obj\Debug\LZOffice.ServiceProvider.csproj.CoreCompileInputs.cache
+C:\Workspaces\LZ-Office-1\LZOffice.ServiceProvider\obj\Debug\LZOffice.4CEAA825.Up2Date
+C:\Workspaces\LZ-Office-1\LZOffice.ServiceProvider\obj\Debug\LZOffice.ServiceProvider.dll
+C:\Workspaces\LZ-Office-1\LZOffice.ServiceProvider\obj\Debug\LZOffice.ServiceProvider.pdb

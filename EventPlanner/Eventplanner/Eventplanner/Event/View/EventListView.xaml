@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="Eventplanner.UI.Event.View.EventListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:view="clr-namespace:Eventplanner.UI.Event.View"
+             xmlns:viewModel="clr-namespace:Eventplanner.UI.Event.ViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" 
+             d:DataContext="{d:DesignInstance Type=viewModel:EventListViewModel, IsDesignTimeCreatable=False}">
+    <UserControl.Resources>
+        <Style x:Key="NaviItemContainerStyle"  TargetType="ContentPresenter">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="2"/>
+        </Style>
+        <DataTemplate x:Key="NaviItemTemplate">
+            <Button Command="{Binding OpenDetailViewCommand}">
+                <Button.Content>
+                    <StackPanel Orientation="Vertical" Margin="10" >
+                        <TextBlock Grid.Row="2" Text="{Binding Title}" Margin="0,0,5,0" Foreground="#545454"  FontSize="16"/>
+                        <TextBlock Text="{Binding Date}" Foreground="#708090" FontSize="15"/>
+                        <!--<TextBlock Text="{Binding Room}" Foreground="#787878" FontSize="16"/>-->
+                        <TextBlock Text="{Binding Status}" Foreground="#787878" FontSize="10"/>
+                    </StackPanel>
+                </Button.Content>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Grid x:Name="grid">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                         VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="FontWeight" Value="Bold"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+
+        <Label Grid.Column="1" Content="Alle Veranstaltungen" FontSize="20"  Padding="30 20" Foreground="#708090" FontWeight="Bold"/>
+
+        <GroupBox Grid.Column="1" Grid.Row="2" BorderBrush="Transparent" Padding="10">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                <ItemsControl ItemsSource="{Binding Events}" ItemContainerStyle="{StaticResource NaviItemContainerStyle}" ItemTemplate="{StaticResource NaviItemTemplate}" Margin="10,10,0,10"/>
+            </ScrollViewer>
+        </GroupBox>
+
+    </Grid>
+</UserControl>

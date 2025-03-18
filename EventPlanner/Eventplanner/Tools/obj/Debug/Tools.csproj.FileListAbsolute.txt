@@ -1,0 +1,6 @@
+C:\Workspaces\Tutorials\WPF_EventPlanner\EventPlanner\Eventplanner\Tools\bin\Debug\Tools.dll
+C:\Workspaces\Tutorials\WPF_EventPlanner\EventPlanner\Eventplanner\Tools\bin\Debug\Tools.pdb
+C:\Workspaces\Tutorials\WPF_EventPlanner\EventPlanner\Eventplanner\Tools\obj\Debug\Tools.csproj.AssemblyReference.cache
+C:\Workspaces\Tutorials\WPF_EventPlanner\EventPlanner\Eventplanner\Tools\obj\Debug\Tools.csproj.CoreCompileInputs.cache
+C:\Workspaces\Tutorials\WPF_EventPlanner\EventPlanner\Eventplanner\Tools\obj\Debug\Tools.dll
+C:\Workspaces\Tutorials\WPF_EventPlanner\EventPlanner\Eventplanner\Tools\obj\Debug\Tools.pdb

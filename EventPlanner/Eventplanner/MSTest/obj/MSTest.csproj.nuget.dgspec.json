@@ -4,14 +4,108 @@
     "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\MSTest\\MSTest.csproj": {}
   },
   "projects": {
-    "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\Eventplanner\\Eventplanner.csproj": {
+    "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\Converter\\Converter.csproj": {
       "restore": {
-        "projectUniqueName": "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\Eventplanner\\Eventplanner.csproj",
-        "projectName": "Eventplanner",
-        "projectPath": "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\Eventplanner\\Eventplanner.csproj",
+        "projectUniqueName": "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\Converter\\Converter.csproj",
+        "projectName": "Converter",
+        "projectPath": "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\Converter\\Converter.csproj",
+        "frameworks": {
+          "net48": {
+            "projectReferences": {
+              "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\DataAccess\\Model.csproj": {
+                "projectPath": "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\DataAccess\\Model.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {}
+      }
+    },
+    "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\DataAccess\\Model.csproj": {
+      "restore": {
+        "projectUniqueName": "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\DataAccess\\Model.csproj",
+        "projectName": "Model",
+        "projectPath": "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\DataAccess\\Model.csproj",
         "frameworks": {
           "net48": {
             "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {}
+      }
+    },
+    "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\DBContext\\DBContext.csproj": {
+      "restore": {
+        "projectUniqueName": "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\DBContext\\DBContext.csproj",
+        "projectName": "DBContext",
+        "projectPath": "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\DBContext\\DBContext.csproj",
+        "frameworks": {
+          "net48": {
+            "projectReferences": {
+              "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\DataAccess\\Model.csproj": {
+                "projectPath": "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\DataAccess\\Model.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {}
+      }
+    },
+    "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\Eventplanner\\UI.csproj": {
+      "restore": {
+        "projectUniqueName": "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\Eventplanner\\UI.csproj",
+        "projectName": "UI",
+        "projectPath": "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\Eventplanner\\UI.csproj",
+        "frameworks": {
+          "net48": {
+            "projectReferences": {
+              "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\Converter\\Converter.csproj": {
+                "projectPath": "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\Converter\\Converter.csproj"
+              },
+              "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\DataAccess\\Model.csproj": {
+                "projectPath": "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\DataAccess\\Model.csproj"
+              },
+              "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\DBContext\\DBContext.csproj": {
+                "projectPath": "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\DBContext\\DBContext.csproj"
+              },
+              "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\IRepositorys\\Interfaces.csproj": {
+                "projectPath": "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\IRepositorys\\Interfaces.csproj"
+              },
+              "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\Repositorys\\Repositorys.csproj": {
+                "projectPath": "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\Repositorys\\Repositorys.csproj"
+              },
+              "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\ServiceProvider\\ServiceProvider.csproj": {
+                "projectPath": "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\ServiceProvider\\ServiceProvider.csproj"
+              },
+              "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\Tools\\Tools.csproj": {
+                "projectPath": "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\Tools\\Tools.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {}
+      }
+    },
+    "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\IRepositorys\\Interfaces.csproj": {
+      "restore": {
+        "projectUniqueName": "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\IRepositorys\\Interfaces.csproj",
+        "projectName": "Interfaces",
+        "projectPath": "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\IRepositorys\\Interfaces.csproj",
+        "frameworks": {
+          "net48": {
+            "projectReferences": {
+              "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\DataAccess\\Model.csproj": {
+                "projectPath": "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\DataAccess\\Model.csproj"
+              }
+            }
           }
         }
       },
@@ -44,8 +138,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\Eventplanner\\Eventplanner.csproj": {
-                "projectPath": "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\Eventplanner\\Eventplanner.csproj"
+              "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\Eventplanner\\UI.csproj": {
+                "projectPath": "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\Eventplanner\\UI.csproj"
               }
             }
           }
@@ -102,6 +196,61 @@
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
         }
+      }
+    },
+    "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\Repositorys\\Repositorys.csproj": {
+      "restore": {
+        "projectUniqueName": "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\Repositorys\\Repositorys.csproj",
+        "projectName": "Repositorys",
+        "projectPath": "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\Repositorys\\Repositorys.csproj",
+        "frameworks": {
+          "net48": {
+            "projectReferences": {
+              "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\DataAccess\\Model.csproj": {
+                "projectPath": "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\DataAccess\\Model.csproj"
+              },
+              "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\DBContext\\DBContext.csproj": {
+                "projectPath": "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\DBContext\\DBContext.csproj"
+              },
+              "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\IRepositorys\\Interfaces.csproj": {
+                "projectPath": "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\IRepositorys\\Interfaces.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {}
+      }
+    },
+    "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\ServiceProvider\\ServiceProvider.csproj": {
+      "restore": {
+        "projectUniqueName": "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\ServiceProvider\\ServiceProvider.csproj",
+        "projectName": "ServiceProvider",
+        "projectPath": "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\ServiceProvider\\ServiceProvider.csproj",
+        "frameworks": {
+          "net48": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {}
+      }
+    },
+    "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\Tools\\Tools.csproj": {
+      "restore": {
+        "projectUniqueName": "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\Tools\\Tools.csproj",
+        "projectName": "Tools",
+        "projectPath": "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\Tools\\Tools.csproj",
+        "frameworks": {
+          "net48": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {}
       }
     }
   }
