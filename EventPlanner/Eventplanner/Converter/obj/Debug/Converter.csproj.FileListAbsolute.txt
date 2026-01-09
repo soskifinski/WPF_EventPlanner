@@ -1,9 +1,0 @@
-C:\Workspaces\Tutorials\WPF_EventPlanner\EventPlanner\Eventplanner\Converter\bin\Debug\Converter.dll
-C:\Workspaces\Tutorials\WPF_EventPlanner\EventPlanner\Eventplanner\Converter\bin\Debug\Converter.pdb
-C:\Workspaces\Tutorials\WPF_EventPlanner\EventPlanner\Eventplanner\Converter\bin\Debug\Models.dll
-C:\Workspaces\Tutorials\WPF_EventPlanner\EventPlanner\Eventplanner\Converter\bin\Debug\Models.pdb
-C:\Workspaces\Tutorials\WPF_EventPlanner\EventPlanner\Eventplanner\Converter\obj\Debug\Converter.csproj.AssemblyReference.cache
-C:\Workspaces\Tutorials\WPF_EventPlanner\EventPlanner\Eventplanner\Converter\obj\Debug\Converter.csproj.CoreCompileInputs.cache
-C:\Workspaces\Tutorials\WPF_EventPlanner\EventPlanner\Eventplanner\Converter\obj\Debug\Converter.csproj.Up2Date
-C:\Workspaces\Tutorials\WPF_EventPlanner\EventPlanner\Eventplanner\Converter\obj\Debug\Converter.dll
-C:\Workspaces\Tutorials\WPF_EventPlanner\EventPlanner\Eventplanner\Converter\obj\Debug\Converter.pdb

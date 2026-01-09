@@ -1,1 +1,0 @@
-C:\Workspaces\Tutorials\WPF_EventPlanner\EventPlanner\Eventplanner\Styles\obj\Debug\Styles.csproj.AssemblyReference.cache

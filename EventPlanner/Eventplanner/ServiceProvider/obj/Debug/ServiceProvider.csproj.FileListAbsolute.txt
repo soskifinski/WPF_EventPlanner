@@ -1,8 +1,0 @@
-C:\Workspaces\Tutorials\WPF_EventPlanner\EventPlanner\Eventplanner\bin\Debug\ServiceProvider.dll.config
-C:\Workspaces\Tutorials\WPF_EventPlanner\EventPlanner\Eventplanner\bin\Debug\ServiceProvider.dll
-C:\Workspaces\Tutorials\WPF_EventPlanner\EventPlanner\Eventplanner\bin\Debug\ServiceProvider.pdb
-C:\Workspaces\Tutorials\WPF_EventPlanner\EventPlanner\Eventplanner\ServiceProvider\obj\Debug\ServiceProvider.csproj.AssemblyReference.cache
-C:\Workspaces\Tutorials\WPF_EventPlanner\EventPlanner\Eventplanner\ServiceProvider\obj\Debug\ServiceProvider.csproj.CoreCompileInputs.cache
-C:\Workspaces\Tutorials\WPF_EventPlanner\EventPlanner\Eventplanner\ServiceProvider\obj\Debug\ServiceP.1657CF0C.Up2Date
-C:\Workspaces\Tutorials\WPF_EventPlanner\EventPlanner\Eventplanner\ServiceProvider\obj\Debug\ServiceProvider.dll
-C:\Workspaces\Tutorials\WPF_EventPlanner\EventPlanner\Eventplanner\ServiceProvider\obj\Debug\ServiceProvider.pdb

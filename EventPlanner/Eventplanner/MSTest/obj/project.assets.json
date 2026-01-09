@@ -679,99 +679,13 @@
           }
         }
       },
-      "Converter/1.0.0": {
-        "type": "project",
-        "dependencies": {
-          "Model": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/Converter.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Converter.dll": {}
-        }
-      },
-      "DBContext/1.0.0": {
-        "type": "project",
-        "dependencies": {
-          "Model": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/DBContext.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/DBContext.dll": {}
-        }
-      },
-      "Interfaces/1.0.0": {
-        "type": "project",
-        "dependencies": {
-          "Model": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/Interfaces.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Interfaces.dll": {}
-        }
-      },
-      "Model/1.0.0": {
+      "Eventplanner/1.0.0": {
         "type": "project",
         "compile": {
-          "bin/placeholder/Model.dll": {}
+          "bin/placeholder/Eventplanner.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Model.dll": {}
-        }
-      },
-      "Repositorys/1.0.0": {
-        "type": "project",
-        "dependencies": {
-          "DBContext": "1.0.0",
-          "Interfaces": "1.0.0",
-          "Model": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/Repositorys.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Repositorys.dll": {}
-        }
-      },
-      "ServiceProvider/1.0.0": {
-        "type": "project",
-        "compile": {
-          "bin/placeholder/ServiceProvider.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ServiceProvider.dll": {}
-        }
-      },
-      "Tools/1.0.0": {
-        "type": "project",
-        "compile": {
-          "bin/placeholder/Tools.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Tools.dll": {}
-        }
-      },
-      "UI/1.0.0": {
-        "type": "project",
-        "dependencies": {
-          "Converter": "1.0.0",
-          "DBContext": "1.0.0",
-          "Interfaces": "1.0.0",
-          "Model": "1.0.0",
-          "Repositorys": "1.0.0",
-          "ServiceProvider": "1.0.0",
-          "Tools": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/UI.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/UI.dll": {}
+          "bin/placeholder/Eventplanner.dll": {}
         }
       }
     }
@@ -1863,53 +1777,18 @@
         "version.txt"
       ]
     },
-    "Converter/1.0.0": {
+    "Eventplanner/1.0.0": {
       "type": "project",
-      "path": "../Converter/Converter.csproj",
-      "msbuildProject": "../Converter/Converter.csproj"
-    },
-    "DBContext/1.0.0": {
-      "type": "project",
-      "path": "../DBContext/DBContext.csproj",
-      "msbuildProject": "../DBContext/DBContext.csproj"
-    },
-    "Interfaces/1.0.0": {
-      "type": "project",
-      "path": "../IRepositorys/Interfaces.csproj",
-      "msbuildProject": "../IRepositorys/Interfaces.csproj"
-    },
-    "Model/1.0.0": {
-      "type": "project",
-      "path": "../DataAccess/Model.csproj",
-      "msbuildProject": "../DataAccess/Model.csproj"
-    },
-    "Repositorys/1.0.0": {
-      "type": "project",
-      "path": "../Repositorys/Repositorys.csproj",
-      "msbuildProject": "../Repositorys/Repositorys.csproj"
-    },
-    "ServiceProvider/1.0.0": {
-      "type": "project",
-      "path": "../ServiceProvider/ServiceProvider.csproj",
-      "msbuildProject": "../ServiceProvider/ServiceProvider.csproj"
-    },
-    "Tools/1.0.0": {
-      "type": "project",
-      "path": "../Tools/Tools.csproj",
-      "msbuildProject": "../Tools/Tools.csproj"
-    },
-    "UI/1.0.0": {
-      "type": "project",
-      "path": "../Eventplanner/UI.csproj",
-      "msbuildProject": "../Eventplanner/UI.csproj"
+      "path": "../Eventplanner/Eventplanner.csproj",
+      "msbuildProject": "../Eventplanner/Eventplanner.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "Eventplanner >= 1.0.0",
       "MSTest.TestAdapter >= 3.5.2",
       "MSTest.TestFramework >= 3.5.2",
       "Microsoft.NET.Test.Sdk >= 17.11.0",
-      "UI >= 1.0.0",
       "coverlet.collector >= 6.0.2"
     ]
   },
@@ -1941,8 +1820,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\Eventplanner\\UI.csproj": {
-              "projectPath": "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\Eventplanner\\UI.csproj"
+            "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\Eventplanner\\Eventplanner.csproj": {
+              "projectPath": "C:\\Workspaces\\Tutorials\\WPF_EventPlanner\\EventPlanner\\Eventplanner\\Eventplanner\\Eventplanner.csproj"
             }
           }
         }

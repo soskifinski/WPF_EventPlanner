@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="Eventplanner.UI.View.Detail.RoomDetailView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Eventplanner.UI.View.Detail"
+             xmlns:viewModel="clr-namespace:Eventplanner.UI.ViewModel.Detail"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance Type=viewModel:RoomDetailViewModel}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+
+        <StackPanel Grid.Column="1"  Grid.Row="1" Background="#E0EEEE">
+            <Label Content="Raumbezeichnung / Nummer" Margin="10 10 10 0" />
+            <TextBox Text="{Binding Room.RoomNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 10"/>
+
+            <Label Content="Location"   Margin="10 10 10 0"/>
+            <ComboBox  ItemsSource="{Binding Locations}" 
+            DisplayMemberPath="Name"
+            SelectedValuePath="Id"
+            SelectedValue="{Binding Room.LocationId, Mode=TwoWay}"
+            Margin="10 0 10 10">
+                <ComboBox.ItemContainerStyle>
+                    <Style TargetType="ComboBoxItem">
+                        <Setter Property="Background" Value="White"/>
+                    </Style>
+                </ComboBox.ItemContainerStyle>
+            </ComboBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Margin="30" Orientation="Horizontal">
+            <Button Content="Save" Width="125" Margin="10" BorderBrush="Transparent" Command="{Binding SaveCommand}" />
+            <Button Content="Delete" Width="125" Margin="10" BorderBrush="Transparent" Command="{Binding DeleteCommand}" />
+        </StackPanel>
+    </Grid>
+</UserControl>

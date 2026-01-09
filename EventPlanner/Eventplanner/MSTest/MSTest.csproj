@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Eventplanner\UI.csproj" />
+    <ProjectReference Include="..\Eventplanner\Eventplanner.csproj" />
   </ItemGroup>
 
   <ItemGroup>
